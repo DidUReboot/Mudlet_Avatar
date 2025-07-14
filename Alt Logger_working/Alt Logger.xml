@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+	<TriggerPackage>
+		<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+			<name>Alt Logger</name>
+			<script></script>
+			<triggerType>0</triggerType>
+			<conditonLineDelta>0</conditonLineDelta>
+			<mStayOpen>0</mStayOpen>
+			<mCommand></mCommand>
+			<packageName>Alt Logger 2022-05-05-1200</packageName>
+			<mFgColor>#ff0000</mFgColor>
+			<mBgColor>#ffff00</mBgColor>
+			<mSoundFile></mSoundFile>
+			<colorTriggerFgColor>#000000</colorTriggerFgColor>
+			<colorTriggerBgColor>#000000</colorTriggerBgColor>
+			<regexCodeList />
+			<regexCodePropertyList />
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Password</name>
+				<script>if not StatTable.PW then
+
+else
+  send(StatTable.PW)
+  tempTimer(4,[[send("\n")]])
+end</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^Your Password:</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Name</name>
+				<script>if not StatTable.Name then 
+  DBalt.GetDatabase()
+else
+  DBalt.GetDatabase()
+  DBalt.GetData()
+  tempTimer(4,[[send(StatTable.Name)]])
+end</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^What name shall you be known by, adventurer?</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Name pick up</name>
+				<script>StatTable.Name = matches[2]</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^Welcome back to the AVATAR System (\w+)</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+		</TriggerGroup>
+	</TriggerPackage>
+	<TimerPackage />
+	<AliasPackage>
+		<AliasGroup isActive="yes" isFolder="yes">
+			<name>Alt Logger</name>
+			<script></script>
+			<command></command>
+			<packageName>Alt Logger 2022-05-05-1200</packageName>
+			<regex></regex>
+			<Alias isActive="yes" isFolder="no">
+				<name>Alt Logger All-in-one</name>
+				<script>-- Alt Logger All in one commands
+if (matches[2] == "list") then
+  DBalt.GetData()
+elseif (matches[2] == "remove") then
+  -- pattern: &lt;name&gt;
+  DBalt.RemChar(matches[3])
+  cecho("Alt removed")
+elseif (matches[2] == "add") then
+  -- pattern: &lt;name&gt; &lt;PW&gt; &lt;Race&gt; &lt;Class&gt; &lt;Tier&gt; &lt;Rank&gt;
+  if matches[7] == "Legend" then
+    DBalt.AddChar(matches[3],matches[4],matches[5],matches[6],matches[7],"4")
+  elseif matches[7] == "Lord" then
+    DBalt.AddChar(matches[3],matches[4],matches[5],matches[6],matches[7],"3")
+  elseif matches[7] == "Hero" then
+    DBalt.AddChar(matches[3],matches[4],matches[5],matches[6],matches[7],"2")
+  elseif matches[7] == "Lowmort" then
+    DBalt.AddChar(matches[3],matches[4],matches[5],matches[6],matches[7],"1")
+  end
+  cecho("Alt added to list.")
+elseif (matches[2] == "update") then
+  -- pattern: &lt;name&gt; &lt;Race&gt; &lt;Class&gt; &lt;Tier&gt; &lt;Rank&gt;
+  if matches[6] == "Legend" then
+    DBalt.UpdateChar(matches[3],matches[4],matches[5],matches[6],"4")
+  elseif matches[6] == "Lord" then
+    DBalt.UpdateChar(matches[3],matches[4],matches[5],matches[6],"3")
+  elseif matches[6] == "Hero" then
+    DBalt.UpdateChar(matches[3],matches[4],matches[5],matches[6],"2")
+  elseif matches[6] == "Lowmort" then
+    DBalt.UpdateChar(matches[3],matches[4],matches[5],matches[6],"1")
+  end
+  cecho("Alt updated.")
+end</script>
+				<command></command>
+				<packageName></packageName>
+				<regex>^altlog (\w+) ?(\w*) ?(\w*) ?(\w*) ?(\w*) ?(\w*) ?(\w*)</regex>
+			</Alias>
+		</AliasGroup>
+	</AliasPackage>
+	<ActionPackage />
+	<ScriptPackage>
+		<ScriptGroup isActive="yes" isFolder="yes">
+			<name>Alt Logger</name>
+			<packageName>Alt Logger 2022-05-05-1200</packageName>
+			<script></script>
+			<eventHandlerList />
+			<Script isActive="yes" isFolder="no">
+				<name>Alt Logger</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--      Alt Logging Script for Avatar          --
+--                                             --
+-------------------------------------------------
+DBalt = DBalt or {}
+
+local AltDB = db:create("AltDatabase",
+  {
+    Alts = {
+              CharName = "",
+              CharPW = "",
+              Race = "",
+              Class = "",
+              Tier = "",
+              Rank = "",
+             _index = { {"CharName"} }
+          }})
+
+
+
+function DBalt.GetDatabase()
+  local AltDB = db:get_database("AltDatabase")
+  return AltDB;
+end
+
+function DBalt.AddChar(Charname,Charpass,Charrace,Charclass,Chartier,Charrank)
+  db:add(AltDB.Alts,{
+  CharName = Charname,
+  CharPW = Charpass,
+  Race = Charrace,
+  Class = Charclass,
+  Tier = Chartier,
+  Rank = Charrank})
+end
+
+function DBalt.RemChar(Charname)
+  db:delete(AltDB.Alts, db:eq(AltDB.Alts.CharName, Charname))
+end
+
+function DBalt.UpdateChar(Charname,Charrace,Charclass,Chartier,Charrank)
+  local Uchar = db:fetch(AltDB.Alts,db:eq(AltDB.Alts.CharName, Charname))[1]
+  Uchar.Race = Charrace
+  Uchar.Class = Charclass
+  Uchar.Tier = Chartier
+  Uchar.Rank = Charrank
+  db:update(AltDB.Alts, Uchar)
+end
+
+function DBalt.SortAlts(Unsorted)
+  table.sort(Unsorted, function(a,b)
+    if a.Rank &gt; b.Rank then
+      return true
+    elseif a.Rank == b.Rank then
+      if a.CharName &lt; b.CharName then
+        return true
+      end
+    end
+    return false
+  end)
+  return Unsorted
+end
+
+--popup for all know characters to login
+function DBalt.GetData()
+  temp = db:fetch(AltDB.Alts,nil,nil)
+  sortedtable = DBalt.SortAlts(temp)
+flatbox = Geyser.UserWindow:new({
+  name="flatbox",
+  titleText = "Characters to log in",
+  x="15%", y="10%",
+  width="65c", height="60c",
+})
+flatbox:setColor("DimGray")
+clearWindow("flatbox")
+
+--labelinuserw = Geyser.Label:new({
+ --- name = "LabelinUserWindow",
+ -- x="0",y="0",width="100%" , height = "100%",
+--  color="DimGray", fontSize=20,
+ -- },flatbox)
+flatbox:cecho("&lt;white:DimGray&gt;\n\nChoose one of the following characters:\n\n")
+flatbox:setFontSize(10)
+setFgColor("flatbox", 255,255,255)
+setBgColor("flatbox", 105,105,105)
+
+for i,o in ipairs(sortedtable) do
+  if o.Class == "BCI" or o.Class == "Bladedancer" or o.Class == "Bodyguard" or o.Class == "Druid" or o.Class == "Fusilier" or o.Class == "Mindbender" or o.Class == "Shadowfist" or o.Class == "Ripper" or o.Class == "Soldier" or o.Class == "Stormlord" or o.Class == "Vizier" or o.Class == "Wizard" then
+    if o.Race == "Dragon" or o.Race == "Sprite" or o.Race == "Troll" or o.Race == "Gith" or o.Race == "Griffon" or o.Race == "Minotaur" or o.Race == "Demonseed" or o.Race == "HighElf" or o.Race == "Tautaur" or o.Race == "Golem" or o.Race == "Ignataur" or o.Race == "BlackDragon" or o.Race == "BlueDragon" or o.Race == "GreenDragon" or o.Race == "WhiteDragon" then
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    elseif o.Race == "Firedrake" then
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    else
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;cyan&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    end
+  elseif o.Class == "Sorcercer" or o.Class == "Priest" or o.Class == "Assassin" or o.Class == "Paladin" or o.Class == "Berserker" then
+    if o.Race == "Dragon" or o.Race == "Sprite" or o.Race == "Troll" or o.Race == "Gith" or o.Race == "Griffon" or o.Race == "Minotaur" or o.Race == "Demonseed" or o.Race == "HighElf" or o.Race == "Tautaur" or o.Race == "Golem" or o.Race == "Ignataur" or o.Race == "BlackDragon" or o.Race == "BlueDragon" or o.Race == "GreenDragon" or o.Race == "WhiteDragon" then
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    elseif o.Race == "Firedrake" then
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    else
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;magenta&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    end
+  else
+    if o.Race == "Dragon" or o.Race == "Sprite" or o.Race == "Troll" or o.Race == "Gith" or o.Race == "Griffon" or o.Race == "Minotaur" or o.Race == "Demonseed" or o.Race == "HighElf" or o.Race == "Tautaur" or o.Race == "Golem" or o.Race == "Ignataur" or o.Race == "BlackDragon" or o.Race == "BlueDragon" or o.Race == "GreenDragon" or o.Race == "WhiteDragon" then
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;white&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;white&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;white&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;magenta&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .."&lt;white&gt; " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    elseif o.Race == "Firedrake" then
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    else
+      if o.Tier == "Legend" then
+        cechoLink("flatbox", "-&lt;red&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Lord" then
+        cechoLink("flatbox", "-&lt;gold&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      elseif o.Tier == "Hero" then
+        cechoLink("flatbox", "-&lt;cyan&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .. "\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      else
+        cechoLink("flatbox", "-&lt;white&gt;" .. o.CharName:title() .. string.rep(" ", 13 - string.len(o.CharName)) .. "&lt;green&gt;" .. o.Tier .. string.rep(" ", 8 - string.len(o.Tier)) .. "&lt;white&gt;" .. o.Race .. string.rep(" ", 10 - string.len(o.Race)) .." " .. o.Class .. string.rep(" ", 10 - string.len(o.Class)) .."\n", [[DBalt.StoreChar("]]..o.CharName..[[") hideWindow("flatbox")]], o.CharName .. " " .. o.Tier .. " " .. o.Race .. " " .. o.Class , true)
+      end
+    end
+  end
+end
+
+echoLink("flatbox", "* EXIT\n", [[hideWindow("flatbox")]], "Exit", true)
+
+resetFormat()
+end
+
+function DBalt.StoreChar(Charname)
+  local CharInfo = db:fetch(AltDB.Alts,db:eq(AltDB.Alts.CharName, Charname))[1]
+  StatTable.Name = CharInfo.CharName
+  StatTable.PW = CharInfo.CharPW
+end
+
+--function sysConnectionEvent()
+ --DBalt.GetDatabase()
+ --DBalt.GetData()
+--end
+
+registerAnonymousEventHandler("sysDisconnectionEvent", "reconnect")</script>
+				<eventHandlerList />
+			</Script>
+		</ScriptGroup>
+	</ScriptPackage>
+	<KeyPackage />
+	<VariablePackage>
+		<HiddenVariables />
+	</VariablePackage>
+</MudletPackage>

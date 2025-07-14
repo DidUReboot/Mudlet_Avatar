@@ -1,0 +1,3630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+	<TriggerPackage>
+		<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+			<name>Vagonuth-Inventory-Mgmt</name>
+			<script></script>
+			<triggerType>0</triggerType>
+			<conditonLineDelta>0</conditonLineDelta>
+			<mStayOpen>0</mStayOpen>
+			<mCommand></mCommand>
+			<packageName>Vagonuth-Inventory-Mgmt</packageName>
+			<mFgColor>#ff0000</mFgColor>
+			<mBgColor>#ffff00</mBgColor>
+			<mSoundFile></mSoundFile>
+			<colorTriggerFgColor>#000000</colorTriggerFgColor>
+			<colorTriggerBgColor>#000000</colorTriggerBgColor>
+			<regexCodeList />
+			<regexCodePropertyList />
+			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Vagonuth Inventory &amp; Alleg Management Triggers</name>
+				<script>-- Only works on characters lord and below (eg not legends)</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>return not (gmcp.Char and gmcp.Char.Status and gmcp.Char.Status.level and tonumber(gmcp.Char.Status.level) &gt; 125)</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>4</integer>
+				</regexCodePropertyList>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Worship</name>
+					<script>AltList.UpdateWorship(matches.worship, (matches.devoted == "devoted worshipper" and true or false))
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You are \d+ years old \(\d+ real life hours?\) and a (?&lt;devoted&gt;devoted worshipper|worshipper) of (?&lt;worship&gt;.*).$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Worship - Atheist</name>
+					<script>AltList.UpdateWorship("Atheist", false)</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You are \d+ years old \(\d+ real life hours?\) .$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>On Insig</name>
+					<script>
+if not OnInsig.isOpen then   -- this checks for the first line, and initializes your variables
+   OnInsig.len = 1
+   OnInsig.isOpen = true
+   if not OnInsig.Lock then OnInsig.InsigArray = {} end
+end
+
+OnInsig.len = OnInsig.len + 1   -- this keeps track of how many lines the trigger is capturing
+
+if not OnInsig.IsPrompt(line) then
+  OnInsig.ArrayAddLine(line)
+else
+  OnInsig.ArrayFinish()
+  OnInsig.len = 0
+  OnInsig.isOpen = false
+end
+
+setTriggerStayOpen("On Insig",OnInsig.len)   -- this sets the number of lines for the trigger to capture
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>10</conditonLineDelta>
+					<mStayOpen>10</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^Your insignia:</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg - Lock</name>
+					<script>--print("\nAlleg lock called (" .. matches[2] .. ")")
+if matches[2] == "a ruby" then
+  AltList.GivenAllegRuby = true
+else
+  AltList.GivenAllegItem = true
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You give (.*) to Allegaagse.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg Lookup</name>
+					<script>if clue == "What do I need?"
+   or clue == "Exactly what I wanted, thank you."
+   or clue == "Here is something for your trouble."
+   or clue == "Fine, I will find someone else to get that for me." 
+   or clue == "Now go away. Maybe I will see if you can be useful some other time."
+   or clue == "You have done such a good job that I have raised my estimation of your worth as a searcher."
+   or clue == "Hah, \"seen\", get it?'" then return end
+   
+if AltList.GivenAllegRuby then 
+  
+  item, item_plane = findItemAndPlane(matches.clue)
+  --print("DEBUG: Alleg Lookup (" .. matches.clue .. ")")
+  
+  if item and item_plane then
+    printMessage("\nAlleg's request", item .. " (" .. item_plane .. ")", "yellow", "white")
+    
+    printGameMessage("Alleg's request", item .. " (" .. AltList.GetCharName() .. ")", "yellow")
+    AltList.AllegRecordRequest(item)
+    AltList.GivenAllegRuby = false
+    
+    if not InventoryList.SearchReport(item) then
+     --print("Not found, consider giving up?")
+    end
+    
+    AltList.ReportNextAvailableAlleg()
+    raiseEvent("AllegRecordRequest")
+  end
+ end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^Allegaagse says '(?&lt;clue&gt;.*)'$</string>
+						<string>^Allegaagse asks '(?&lt;clue&gt;.*)'$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg - Gave Up</name>
+					<script>if AltList.GivenAllegRuby then 
+  AltList.GivenAllegRuby = false
+  AltList.AllegRecordGiveUp()
+  print("\n")
+  AltList.ReportNextAvailableAlleg()
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Allegaagse says 'Feel free to continue paying me for my time though.'</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>2</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg Clear</name>
+					<script>--You give an aurora bow to Allegaagse.                                            [ALLEG - Medium]
+
+--&lt;7738/7738hp 24763/24839ma 12361v 796&gt; 0 lag - - surge off 
+
+--Allegaagse says 'Exactly what I wanted, thank you.'
+--Allegaagse says 'Here is something for your trouble.'
+--You have received an award of 5 practice points!
+
+if AltList.GivenAllegItem then
+  AltList.AllegRecordCleared()
+  send("insig", false)
+  AltList.GivenAllegItem = false
+  print("\n")
+  AltList.ReportNextAvailableAlleg()
+  raiseEvent("AllegRecordCleared")
+end
+
+--Allegaagse says 'You have done such a good job that I have raised my estimation of your worth as a searcher.'
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Allegaagse says 'Here is something for your trouble.'</string>
+						<string>Allegaagse says 'You have done such a good job that I have raised my estimation of your worth as a searcher.'</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>2</integer>
+						<integer>2</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Gold</name>
+					<script>-- You have 38955 gold coins in hand and 2160189 gold coins in the bank.
+--^account which now totals (?&lt;bank&gt;\d+) coins.$
+local gold = matches.bank + (matches.onhand and matches.onhand or 0)
+AltList.UpdateGold(gold)
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You have (?&lt;onhand&gt;\d+) gold coins in hand and (?&lt;bank&gt;\d+) gold coins in the bank.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Bank deposit</name>
+					<script>sendGMCP("Char.Status")
+
+local gold = matches.bank 
+
+-- give gmcp.Char.Status.gold 2 seconds to update itself
+tempTimer(2, function()
+  gold = gold + (tonumber(gmcp.Char.Status.gold) or 0)
+  AltList.UpdateGold(gold)
+end)
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^\w+, you deposit \d+ coins( and gemstones)?. Your account now has (?&lt;bank&gt;\d+) coins.$</string>
+						<string>^has a total of (?&lt;bank&gt;\d+) coins in it.$</string>
+						<string>^(account )?which now totals (?&lt;bank&gt;\d+) coins.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Pracs</name>
+					<script>AltList.UpdatePracs(matches[2])</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You need \d+ experience to level and have (\d+) practices.$</string>
+						<string>'You have (\d+) practice sessions left.'</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>QP</name>
+					<script>AltList.UpdateQP(matches[2])</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You have (\d+) quest points?.$</string>
+						<string>^You have (\d+) quest points? remaining.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Receive QP</name>
+					<script>-- You have received an award of 5 quest points!
+
+local QP = AltList.Chars[AltList.GetCharName()].QP + matches[2]
+printGameMessage("QP!", "Received " .. matches[2] .. " QP", "yellow", "white")
+AltList.UpdateQP(QP)
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You have received an award of (\d+) quest points!$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Server time</name>
+					<script>-- This trigger will calculate the timezone difference between the server and the player whenever the "time" command is used
+-- It'll save this difference between different play sessions
+
+-- Function to convert date string to seconds since epoch (Unix timestamp)
+local function convertToTimestamp(dateStr)
+    -- Define month names and their numeric representations
+    local monthNames = {
+        Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6,
+        Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12
+    }
+
+    -- Extract date components from the string
+    local day, monthName, dayOfMonth, time, year = dateStr:match("(%a+) (%a+)  ?(%d+) (%d+:%d+:%d+) (%d+)")
+
+    -- Get the numeric month value
+    local month = assert(monthNames[monthName], "Invalid month name")
+
+    -- Extract time components
+    local hour, minute, second = time:match("(%d+):(%d+):(%d+)")
+
+    -- Create a date table with the extracted components
+    local dateTable = {
+        year = tonumber(year),
+        month = tonumber(month),
+        day = tonumber(dayOfMonth),
+        hour = tonumber(hour),
+        min = tonumber(minute),
+        sec = tonumber(second)
+    }
+
+    -- Calculate the Unix timestamp (seconds since epoch)
+    local timestamp = os.time(dateTable)
+
+    return timestamp
+end
+
+-- some timezones are 30 mins off (eg Newfoundland, India)
+local function roundToNearestHalf(number)
+    local floorValue = math.floor(number)
+    local fractionalPart = number - floorValue
+
+    if fractionalPart &lt; 0.25 then
+        return floorValue
+    elseif fractionalPart &lt; 0.75 then
+        return floorValue + 0.5
+    else
+        return floorValue + 1
+    end
+end
+
+local timestamp = convertToTimestamp(matches.time) -- parse the server time reported in the command "time"
+
+local timediff = roundToNearestHalf((os.time() - timestamp)/3600) -- take the difference between local time and servertime and calc the hour diff
+
+if timediff &gt; 24 or timediff &lt; -24 then
+  error("Trigger: Server time (timezone difference greater than 24 hours)")
+  return
+end
+
+AltList.TimeZone = timediff
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^The System time \(EST\) is currently:           (?&lt;time&gt;.*)$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>On Locker</name>
+					<script>
+if not OnLocker.isOpen then   -- this checks for the first line, and initializes your variables
+   OnLocker.len = 1
+   OnLocker.isOpen = true
+   OnLocker.LockerArray = {}
+end
+
+OnLocker.len = OnLocker.len + 1   -- this keeps track of how many lines the trigger is capturing
+
+if line ~= "" then
+  local locker_item = string.match(line, "%d+  (.+)")
+  if locker_item ~= nil then 
+    locker_item = string.gsub(locker_item, '^%s*(.-)%s*$', '%1')
+    table.insert(OnLocker.LockerArray,{name = locker_item})
+  end
+else  
+   InventoryList.AddLocker(OnLocker.LockerArray)
+   OnLocker.len = 0
+   OnLocker.isOpen = false
+end
+
+setTriggerStayOpen("On Locker",OnLocker.len)   -- this sets the number of lines for the trigger to capture
+
+
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>10</conditonLineDelta>
+					<mStayOpen>10</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^Your locker contains (\d+) items:</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Existing Character.</name>
+					<script>sendGMCP("Char.Group.List")
+sendGMCP("Char.Status")
+sendGMCP("Char.Vitals")
+
+tempTimer(4, function()
+
+  local char_name = string.lower(gmcp.Char.Status.character_name):gsub("^%l", string.upper)
+
+  if char_name == "" then 
+  cecho("&lt;yellow&gt;Vagonuth-Inventory-Mgmt error: &lt;white&gt;could not get character name, gmcp returning &lt;red&gt;" .. char_name .. "\n")
+  cecho("If this is different than the name you logged in with, try reconnecting to AVATAR\n")
+  error("gmcp.Char.Status.character_name not returning character name"); return false; end
+
+  -- Sometimes gmcp.Char.Status bugs out and requires a relog. We can check this against gmcp.Char.Group.List
+  for _,Player in ipairs(gmcp.Char.Group.List) do
+    if Player.name == char_name then
+      return true
+    end
+  end
+  
+  cecho("&lt;yellow&gt;Vagonuth-Inventory-Mgmt error: &lt;white&gt;could not get character name, gmcp returning &lt;red&gt;" .. char_name .. "\n")
+  cecho("If this is different than the name you logged in with, try reconnecting to AVATAR\n")
+  display(gmcp.Char.Group.List)
+
+  error("gmcp.Char.Status is not matching gmcp.Char.Group")
+  return false
+
+end)
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Existing Character.</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>2</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Welcome Back</name>
+					<script>AltList.LoginName = string.lower(matches.charname):gsub("^%l", string.upper)
+InventoryList.LoginName = string.lower(matches.charname):gsub("^%l", string.upper)
+if GlobalVar.Debug then printMessage("Debug", "Character is " .. AltList.GetCharName()) end
+
+if AltList.TimeZone == 0 then tempTimer(5, function() send("time"); end); end
+if not AltList.Chars[AltList.LoginName] then
+  print("\n")
+  printGameMessage("InvMgmt", "Running info collection commands on first login (" .. AltList.LoginName .. ")")
+  printGameMessage("InvMgmt", "Please wait 10 seconds before logging in with a different alt")
+  printGameMessage("InvMgmt", "Type ihelp for a full list of commands")  
+  tempTimer(5, function() send("score" .. getCommandSeparator() .. "worth" .. getCommandSeparator() .. "questpoints" .. getCommandSeparator() .. "insig", false); end)
+  tempTimer(10, function() printGameMessage("InvMgmt", "Info collected, thank you!") end)
+  
+  AltList.WelcomeTimer = AltList.WelcomeTimer or nil
+
+  local function killWelcomeTimer()
+    if AltList.WelcomeTimer then
+      killTimer(AltList.WelcomeTimer)
+    end
+  end
+  killWelcomeTimer()
+  
+  AltList.WelcomeTimer = tempTimer(5, function()
+    InventoryList.UpdateItems("inv", false)
+  end)
+  
+  registerAnonymousEventHandler("sysDisconnectionEvent", killWelcomeTimer, true)
+end
+
+
+
+
+
+
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^Welcome( back)? to the AVATAR System(, Hero|, Lord|, Lady|, Legend)? (?&lt;charname&gt;\w+)</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Reconnecting</name>
+					<script>AltList.LoginName = nil
+InventoryList.LoginName = nil
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Reconnecting.</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>3</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Lotto Pinfo Inventory Count</name>
+					<script>-- Zaffer's format:
+--  1 * a shaleskin arm guard (3) 
+-- Hydro's format:
+-- 2. a sandblasted emerald
+
+
+
+local items_owned = 0
+items_owned = InventoryList.ItemsOnHand(matches.item)
+--print(matches.item)
+
+if items_owned &gt; 0 then
+  deleteLine()
+  cecho("\n&lt;ansi_yellow&gt;" .. matches[1] .. " " .. "&lt;yellow&gt;[Owned: " .. items_owned .. "]\n")
+  cecho("\n")
+--else
+  --cecho("&lt;ansi_yellow&gt;" .. line .. "\n")
+--  cecho("&lt;ansi_yellow&gt;" .. line .. " " .. "&lt;yellow&gt;[None]\n")
+--  echo("\n")
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^#\d+ \(x\d+\) (?&lt;item&gt;.*)$</string>
+						<string>^\d+. \(x\d+\)  (?&lt;item&gt;.*)$</string>
+						<string>^ ?\b\d{1,2}\b\.? (\*|\+|\-|\$|\@)? ?(?&lt;item&gt;.+?)(?:\s+\(\d+\))?$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg says remind me</name>
+					<script>if AltList.GivenAllegRuby then
+  TryAction("say remind me", 2)
+  TryAction("get ruby", 2)
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Allegaagse says 'If you don't remember the task just say REMIND ME.'</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>2</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>venison</name>
+					<script>tempTimer(1, function() cecho("&lt;yellow&gt;Type 'run-venison' to collect turn in venison\n") end)</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Allegaagse says 'Where's the beef? Actually, I prefer some venison.'</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>2</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>QP transfer</name>
+					<script>local transferee = GMCP_name(matches[3])
+
+if AltList.PlayerExists(transferee) then
+  local transferee_qp = AltList.Chars[transferee].QP or 0
+  transferee_qp = transferee_qp + matches[2]
+  AltList.UpdateQP(transferee_qp, transferee)
+else
+  printGameMessage("Debug", "QP transferee not found, never logged in with this package on that alt?")
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^(\d+) Quest Points transferred to (\w+) and a fee of 0 quest points were automatically subtracted.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg Reward</name>
+					<script>printGameMessage("Alleg's reward", matches[2] .. " (" .. AltList.GetCharName() .. ")", "yellow", "white")
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^Allegaagse gives you (.*).$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg Reward XP</name>
+					<script>
+local reward_xp = multimatches[2][2]
+
+printGameMessage("Alleg's reward", "XP: " .. reward_xp .. " (" .. AltList.GetCharName() .. ")", "yellow")</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>6</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Allegaagse says 'Here is something for your trouble.'</string>
+						<string>^You have received an award of (\d+) experience points!$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>3</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Alleg Accepts Give Up</name>
+					<script>raiseEvent("AllegGiveUp")
+
+</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>Allegaagse says 'Now go away. Maybe I will see if you can be useful some other time.'</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>3</integer>
+					</regexCodePropertyList>
+				</Trigger>
+			</TriggerGroup>
+		</TriggerGroup>
+	</TriggerPackage>
+	<TimerPackage>
+		<TimerGroup isActive="yes" isFolder="yes" isTempTimer="no" isOffsetTimer="no">
+			<name>Vagonuth-Inventory-Mgmt</name>
+			<script></script>
+			<command></command>
+			<packageName>Vagonuth-Inventory-Mgmt</packageName>
+			<time></time>
+			<TimerGroup isActive="yes" isFolder="yes" isTempTimer="no" isOffsetTimer="no">
+				<name>Vagonuth Inventory &amp; Alleg Management Timers</name>
+				<script></script>
+				<command></command>
+				<packageName></packageName>
+				<time>00:00:00.000</time>
+				<Timer isActive="yes" isFolder="no" isTempTimer="no" isOffsetTimer="no">
+					<name>Inventory Check</name>
+					<script>InventoryList.UpdateItems("inv", false)</script>
+					<command></command>
+					<packageName></packageName>
+					<time>00:15:00.000</time>
+				</Timer>
+			</TimerGroup>
+		</TimerGroup>
+	</TimerPackage>
+	<AliasPackage>
+		<AliasGroup isActive="yes" isFolder="yes">
+			<name>Vagonuth-Inventory-Mgmt</name>
+			<script></script>
+			<command></command>
+			<packageName>Vagonuth-Inventory-Mgmt</packageName>
+			<regex></regex>
+			<AliasGroup isActive="yes" isFolder="yes">
+				<name>Vagonuth Inventory &amp; Alleg Management</name>
+				<script></script>
+				<command></command>
+				<packageName></packageName>
+				<regex></regex>
+				<Alias isActive="yes" isFolder="no">
+					<name>InventoryList Aliases</name>
+					<script>local cmd = string.lower(matches[2])
+local args = matches[3]
+
+
+if cmd == "iupdate" then
+  InventoryList.UpdateItems("inv", true)
+  
+elseif cmd == "isearch" then
+  if args ~= "" then
+    InventoryList.SearchReport(args)
+  else
+    print("Syntax: isearch &lt;item name&gt;\twill search inventory list for item name")
+  end
+elseif cmd == "isearchex" then
+  if args ~= "" then
+    char_name, item_name = args:match("^(%S+)%s+(.*)$")
+    if not item_name then print("Error: please provide two arguments\nSyntax: isearchex &lt;charname&gt; &lt;item name&gt;\n\twill search inventory list for item name on character level"); return; end
+    InventoryList.SearchReport(item_name, char_name)
+  else
+    print("Syntax: isearchex &lt;charname&gt; &lt;item name&gt;\twill search inventory list (excluding charname) for item name")
+  end
+elseif cmd == "isearchlvl" then
+  if args ~= "" then
+    level, item_name = args:match("^(%S+)%s+(.*)$")
+    if not item_name then print("Error: please provide two arguments\nSyntax: isearchlvl &lt;level&gt; &lt;item name&gt;\n\twill search inventory list for item name held by character level"); return; end
+    InventoryList.SearchReportLevel(item_name, level)
+  else
+    print("Syntax: isearchlvl &lt;level&gt; &lt;item name&gt;\twill search inventory list for item name held by level")
+  end 
+elseif cmd == "icount" then
+  if args ~= "" then
+    InventoryList.CountReport(args)
+  else
+    print("Syntax: icount &lt;item name&gt;\twill count every item name in inventory list")
+  end
+elseif cmd == "icountex" then
+  if args ~= "" then
+    char_name, item_name = args:match("^(%S+)%s+(.*)$")
+    if not item_name then print("Error: please provide two arguments\nSyntax: icountex &lt;charname&gt; &lt;item name&gt;\n\tCount every &lt;item&gt; in inventory list (excl. &lt;char&gt;)"); return; end
+    InventoryList.CountReport(item_name, char_name)
+  else
+    print("Syntax: icountex &lt;charname&gt; &lt;item name&gt;\tCount every &lt;item&gt; in inventory list (excl. &lt;char&gt;)")
+  end
+elseif cmd == "icountlvl" then
+  if args ~= "" then
+    level, item_name = args:match("^(%S+)%s+(.*)$")
+    if not item_name then print("Error: please provide two arguments\nSyntax: icountlvl &lt;level&gt; &lt;item name&gt;\n\tCount every &lt;item&gt; in inventory list with character level)"); return; end
+    InventoryList.CountReportLevel(item_name, level)
+  else
+    print("Syntax: icountlvl &lt;level&gt; &lt;item name&gt;\tCount every &lt;item&gt; in inventory list with character level)")
+  end
+elseif cmd == "turninvault" then
+  turnInTreasureHunter()
+elseif cmd == "movevault" then
+  if args == "" then
+    moveItemsBetweenBags()
+  else
+    bag1, bag2 = splitArgumentIntoTwo(args)
+    if bag1 == nil or bag2 == nil then
+      print("Error: Invalid input format. Use one or two words, or enclose multiple words in single quotes.")
+    else
+      moveItemsBetweenBags(bag1, bag2)
+    end
+  end
+elseif cmd == "idownload" then
+  VagoInv:UpdateVersion()
+
+elseif cmd == "ihelp" then
+  local ilist_cmds = {
+    {"iupdate", "force inventory list to update manually"},
+    {"", "note: iupdate runs every 15 mins in the background"},
+    {"isearch &lt;item&gt;", "Searches inventory list for &lt;item&gt;"},
+    {"icount &lt;item&gt;", "Count every &lt;item&gt; in inventory list"},
+    {"isearchex &lt;char&gt; &lt;item&gt;", "Searches inventory list (excl. &lt;char&gt;) for &lt;item&gt;"},
+    {"icountex &lt;char&gt; &lt;item&gt;", "Count every &lt;item&gt; in inventory list (excl. &lt;char&gt;)"},
+    {"isearchlvl &lt;level&gt; &lt;item name&gt;", "Will search inventory list for item name held by level"},
+    {"icountlvl &lt;level&gt; &lt;item name&gt;", "Count every &lt;item&gt; in inventory list with character level"},
+    {"",""},
+    {"repinv", "Reports your characters with the MOST inventory space available"},
+    {"repinvr", "Reports your character with the LEAST inventory space available"},
+    {"replocker", "Reports which characters have lockers (to update: look in locker)"},
+    --{"idownload", "Downloads the latest version of the package"},
+    {"repgold", "Reports your total gold across all characters"},
+    {"repqp", "Reports your total QP across all characters"},
+    {"repalleg", "Reports your alleg status across all characters"},
+    {"repinsig", "Reports a summary of your alleg insigs"},
+    {"repvault", "Reports how many vault treasure hunter items you have"},
+    {"repthief", "Reports how many vault thief's bane items you have"},
+    {"",""},
+    {"turninvault", "Turns in the vault items one at a time (have them in your inventory)"},
+    {"movevault &lt;lootbag&gt; &lt;newbag&gt;", "Moves one set of vault items from loot bag to new bag"},
+  }
+  showCmdSyntax("Inventory List Management Commands", ilist_cmds)
+else
+  error("Error in inventorylist alias, shouldn't be reached.")
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^(?i)(isearch|icount|isearchex|icountex|isearchlvl|icountlvl|iupdate|idownload|ihelp|turninvault|movevault)\b\s*(.*)$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>AltList Reports</name>
+					<script>local cmd = string.lower(matches[2])
+local args = matches[3]
+
+if cmd == "qp" then
+  AltList.ReportQP()
+elseif cmd == "gold" then
+  AltList.ReportGold()
+elseif cmd == "alleg" then
+  AltList.ReportAlleg()
+elseif cmd == "vault" then
+  InventoryList.VaultHunter(args)
+elseif cmd == "thief" then
+  InventoryList.ThiefHunter()
+elseif cmd == "insig" then
+  AltList.ReportInsig()
+elseif cmd == "inv" then
+  AltList.ReportInventorySpace()
+elseif cmd == "invr" then
+  AltList.ReportInventorySpace(-5)
+elseif cmd == "locker" then
+  InventoryList.ReportLockers()
+elseif cmd == "regen" then
+  AltList.ReportRegen(125)
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^(?i)rep(qp|gold|alleg|vault|thief|insig|inv|invr|locker|regen)\b\s*(.*)$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>I give up</name>
+					<script>send("say I give up", false)
+
+-- Try to make sure Alleg actually "hears" our "I give up" (ie he's not dealing with another player)
+safeTempTrigger("AllegGiveUpTrig", "Allegaagse says 'Now go away. Maybe I will see if you can be useful some other time.'", function()
+  AltList.AllegRecordGiveUp()
+  print("\n")
+  AltList.ReportNextAvailableAlleg()
+end, "begin", 1)
+
+safeTempTimer("AllegGiveUpKillTrig", 10, function() safeKillTrigger("AllegGiveUpTrig") end)
+
+
+</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^(?i)(say I give up|igu|giveup)$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>remind me</name>
+					<script>AltList.GivenAllegRuby = true
+send("say remind me", false)
+
+local wait = tonumber(gmcp.Char.Vitals.lag)
+local char_name = AltList.GetCharName()
+
+wait = wait + 3
+
+
+if AltList.RemindMeTimer then killTimer(AltList.RemindMeTimer); AltList.RemindMeTimer = nil end
+AltList.RemindMeTimer = tempTimer(wait, function() if AltList.GivenAllegRuby and AltList.GetCharName() == char_name then AltList.GivenAllegRuby = false end; end)
+
+registerAnonymousEventHandler("sysDisconnectionEvent", function() if AltList.RemindMeTimer then killTimer(AltList.RemindMeTimer); AltList.RemindMeTimer = nil end; end, true)
+
+-- To Review: there was a bug in this before the event handler, ie, character does a remind me, relogs in with another character quickly and gives a ruby and the timer turns off AltList.GivenAllegRuby before the clue is given
+-- The event handler is meant to fix this, ie, killing the timer on a disconnect/reconnect
+-- To confirm in the future if this fixes the bug</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^(?i)say remind me$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Alleg Need</name>
+					<script>local cmd = string.lower(matches[2])
+local args = matches[3]
+
+
+if cmd == "need" then
+  AltList.AllegNeeded((args ~= "" and args or nil))
+elseif cmd == "clear" then
+  if args ~= "" then
+    AltList.AllegRecordCleared(args)
+  else
+    print("Syntax: allegclear &lt;char name&gt;\tmarks the character as completed their alleg")
+  end
+else
+  error("Error in alleg alias, shouldn't be reached.")
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^(?i)alleg(need|clear)\b\s*(.*)$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>venison</name>
+					<script>local cs = getCommandSeparator()
+send("recall"..cs.."down"..cs.."west"..cs.."open west"..cs.."west"..cs.."north"..cs.."west"..cs.."open cabinet"..cs.."get venison cabinet"..cs.."east"..cs.."south"..cs.."open east"..cs.."east"..cs.."east"..cs.."south"..cs.."south"..cs.."south"..cs.."south"..cs.."south"..cs.."south"..cs.."south"..cs.."up"..cs.."south"..cs.."west"..cs.."give venison alleg")</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^(venison|run-venison)$</regex>
+				</Alias>
+			</AliasGroup>
+		</AliasGroup>
+	</AliasPackage>
+	<ActionPackage />
+	<ScriptPackage>
+		<ScriptGroup isActive="yes" isFolder="yes">
+			<name>Vagonuth-Inventory-Mgmt</name>
+			<packageName>Vagonuth-Inventory-Mgmt</packageName>
+			<script></script>
+			<eventHandlerList />
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Vagonuth Inventory &amp; Alleg Management Scripts</name>
+				<packageName></packageName>
+				<script></script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>README</name>
+					<packageName></packageName>
+					<script>-- Vagonuth Inventory Package for AVATAR MUD (avatar.outland.org:3000)
+-- Note: could be easily modified for any MUD that supports GMCP's Char.Items.List format
+-- README FILE
+
+-- This is a standalone module that can be installed in Mudlet to help track your inventory and alleg
+-- For the latest, check out the github: https://github.com/raretypeoffox/vagonuth-lists-mpackage/wiki
+
+-- The package will track a variety of information about your character including:
+
+-- Tracks:
+-- + Each characters inventory, items in bags and your lockers
+-- + Alleg item request + status with Alleg
+-- + QP, gold, insigs
+-- + Character stats: race, class, hp, mana, level, etc. (note: no reports for these)
+-- + Character worship status
+
+-- Doesn't track:
+-- - Currently equipped items
+-- - Bags within Bags
+-- - Bags with too many items in it (gmcp limit, will give you error)
+
+-- Opportunities (easy to implement):
+-- + Write a report showing all characters, showing characters by most hp, most mana, chars that need to regen, etc.
+-- + Write a report showing # of all alleg items you have
+
+
+-- *** Information for Coders ***
+
+-- Key Data Structures
+
+-- InventoryList.Items - the parent table where everything is saved
+-- InventoryList.Items["chararacter"] -- the parent table for that particular character's items
+-- InventoryList.Items["chararacter"].locker -- contents of character's locker
+-- InventoryList.Items._BagNames -- lookup tables for converting unique id's to bag names
+
+-- AltList.Chars -- the parent table where all the character stats are saved
+-- AltList.Chars["character"] -- the parent table for that particular character's stats
+-- AltList.Chars["character"].Alleg -- table for that character's alleg info
+
+-- Key Functions
+
+-- InventoryList.UpdateItems() -- updates the inventory list
+-- InventoryList.Search(tbl, search) -- used to search for an item in the inventory list, returns a table while all matching items
+
+-- AltList.UpdateVitals() -- updates character vitals from gmcp
+-- AltList.UpdateXXX()  -- variety of other functions that update
+
+-- Supporting Scripts
+
+-- Insig Script -- parses the "insig" trigger text into the insig table
+-- Alleg Script -- converts alleg items to keywords, checks if a looted item is alleg
+-- Time Functions -- calculates the time zone we're in
+-- Help functions -- misc helper functions
+-- wait script -- allows use to use the wait command (needed for inventory update)
+
+
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>CHANGELOG</name>
+					<packageName></packageName>
+					<script>-- Vagonuth AVATAR Package Change Log
+
+-- v1.0.6
+-- added repinsig
+
+-- v1.0.7
+-- added README, CHANGELOG
+-- changed data structure: bags are now tracked by unique ID in InventoryList.Items
+-- added: isearchlvl, icountlvl
+-- added: replocker
+-- updated: ihelp
+
+-- v1.0.8 (October 31, 2024)
+-- added: run-venison (quick command to turn-in venison)
+-- added: qp updates when using qp transfer now
+-- added: repinvr (reverse inventory report)
+-- added: turninvault (auto turnin treasure hunter items)
+-- added: movevault (move treasure hunter items between bags)
+-- updated: repvault &lt;charname&gt; available now, repvault shows who has an item
+-- updated inventory count in Vagonuth lottobot pinfo
+-- updated: repalleg now show who has an item and how many your have
+-- bug fix: preventing legend from overwriting lord inventory/altlist
+-- bug fix: heavy shroud keyword fixed
+-- hot fix: movebags handles arguments slightly differently
+-- hot fix: repinvr
+
+-- v1.0.9 (in progress)
+-- 
+
+
+
+
+
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>VagoInvInstall</name>
+					<packageName></packageName>
+					<script>-- Installed with: lua installPackage("https://github.com/raretypeoffox/vagonuth-lists-mpackage/releases/latest/download/Vagonuth-Inventory-Mgmt.mpackage")
+VagoInv = VagoInv or {}
+VagoInv.Version = "v1.0.8"
+VagoInv.OnlinePath = "https://github.com/raretypeoffox/vagonuth-lists-mpackage/releases/latest/download/"
+VagoInv.OnlineVersionFile = "https://raw.githubusercontent.com/raretypeoffox/vagonuth-lists-mpackage/main/versions.lua"
+VagoInv.ProfileName = getProfileName():lower()
+VagoInv.DownloadPath = getMudletHomeDir().."/vagonuth inv package/"
+VagoInv.Downloading = false
+
+function VagoInv:DownloadVersionFile()
+    if not io.exists(VagoInv.DownloadPath) then lfs.mkdir(VagoInv.DownloadPath) end
+    local filename = "versions.lua"
+    VagoInv.Downloading=true
+    downloadFile(VagoInv.DownloadPath .. filename, VagoInv.OnlineVersionFile)
+end
+
+function VagoInv:CheckVersion()
+    local path = VagoInv.DownloadPath .. "versions.lua"
+    local versions = {}
+    
+    table.load(path, versions)
+    local pos = table.index_of(versions, VagoInv.Version) or 0
+    local line = ""
+    if pos ~= #versions then
+        cecho("&lt;white&gt;Newer version of Vagonuth Inventory Management Package available\n")
+        cecho("&lt;white&gt;Type the command &lt;yellow&gt;idownload &lt;white&gt;to update\n")
+      end
+end
+
+function VagoInv:UpdateVersion()
+    if VagoInv.downloadFileHandler then
+        killAnonymousEventHandler(VagoInv.downloadFileHandler)
+    end
+    if table.contains(getPackages(),"Vagonuth-Inventory-Mgmt") then
+        uninstallPackage("Vagonuth-Inventory-Mgmt")
+      end
+    installPackage(VagoInv.OnlinePath .. "Vagonuth-Inventory-Mgmt.mpackage")
+end
+
+function VagoInv:onFileDownloaded(event, ...)
+    if event == "sysDownloadDone" and VagoInv.Downloading then
+        local file = arg[1]
+        if string.ends(file,"/versions.lua") then
+            VagoInv.Downloading=false
+            VagoInv:CheckVersion()
+        end
+    end
+end
+
+VagoInv.downloadFileHandler = VagoInv.downloadFileHandler or nil
+
+if VagoInv.downloadFileHandler then
+    killAnonymousEventHandler(VagoInv.downloadFileHandler)
+end
+
+VagoInv.downloadFileHandler = registerAnonymousEventHandler("sysDownloadDone","VagoInv:onFileDownloaded")
+
+tempTimer(2, [[VagoInv.DownloadVersionFile()]])</script>
+					<eventHandlerList />
+				</Script>
+				<ScriptGroup isActive="yes" isFolder="yes">
+					<name>AltList Support</name>
+					<packageName></packageName>
+					<script></script>
+					<eventHandlerList />
+					<Script isActive="yes" isFolder="no">
+						<name>Insig Script</name>
+						<packageName></packageName>
+						<script>OnInsig = OnInsig or {}
+OnInsig.isOpen = OnInsig.isOpen or false
+OnInsig.len = OnInsig.len or 0
+OnInsig.InsigArray = OnInsig.InsigArray or {}
+
+OnInsig.Lock = OnInsig.Lock or false
+
+function OnInsig.IsPrompt(line)
+    -- for insig, just looking for the empty line should work
+    if line == "" then return true else return false end
+    -- Note: if you're using a prompt that is not the standard prompt from setup, you'll need to edit this line so that this regex matches your prompt (test at regex101.com)
+    --local pattern = "^(.*)&lt;(%d+)/(%d+)hp (%d+)/(%d+)ma (%d+)v (%d+)&gt; (%d+)"
+    --print(string.match(line, pattern))
+    --return string.match(line, pattern) ~= nil
+end
+
+function OnInsig.ArrayAddLine(line)
+  if OnInsig.Lock then return end
+  line = string.gsub(line, '^%s*(.-)%s*$', '%1') -- remove leading and trailing white space
+  table.insert(OnInsig.InsigArray,line)
+end
+
+function OnInsig.ArrayFinish()
+  if OnInsig.Lock then return end
+  
+  table.remove(OnInsig.InsigArray,1) -- remove's first line, i.e., Your playerinfo is:
+  --table.remove(OnInsig.InsigArray, #OnInsig.InsigArray) -- removes last line (empty line, before the prompt)
+  
+  OnInsig.Lock = true
+  OnInsig.Write()
+end
+
+
+function OnInsig.Write()
+  AltList.UpdateInsigs(OnInsig.InsigArray)
+  OnInsig.Lock = false
+end</script>
+						<eventHandlerList />
+					</Script>
+					<Script isActive="yes" isFolder="no">
+						<name>Alleg Script</name>
+						<packageName></packageName>
+						<script>-- Define the data set
+local AllegItems = {
+    {
+        clue = "A beacon from the stands would make me happy.",
+        plane = "Noctopia",
+        item = "Havynne's Lantern"
+    },
+    {
+        clue = "A bow made of gold would be a fine addition to my collection.",
+        plane = "Astral",
+        item = "Golden Bow"
+    },
+    {
+        clue = "A river of blood should make for some interesting flails.",
+        plane = "Noctopia",
+        item = "Bloodletter Flail"
+    },
+    {
+        clue = "Be a lamb and fetch me a knife from Karnath.",
+        plane = "Karnath",
+        item = "Sacrificial Knife"
+    },
+    {
+        clue = "Bring me a dagger I can use to cut glass.",
+        plane = "Arcadia",
+        item = "Diamond Dagger"
+    },
+    {
+        clue = "Bring me a fiery ring.",
+        plane = "Fire",
+        item = "Ring Of The White Flame"
+    },
+    {
+        clue = "Bring me a fiery signet.",
+        plane = "Fire",
+        item = "Signet Of The Pure Flame"
+    },
+    {
+        clue = "Bring me a goat's head from the demons. Mount it on a stick or something.",
+        plane = "Tarterus",
+        item = "Ram's Head staff"
+    },
+    {
+        clue = "Bring me a madman's embedded whip.",
+        plane = "Stone",
+        item = "Shard-Embedded Whip"
+    },
+    {
+        clue = "Bring me a shroud. Be sure it has some heft to it.",
+        plane = "Karnath",
+        item = "Heavy Shroud"
+    },
+    {
+        clue = "Bring me a Sultan's head! Or the turban that rests on it at least.",
+        plane = "Water",
+        item = "Sultan's Turban"
+    },
+    {
+        clue = "Bring me something golden that will keep me well fed.",
+        plane = "Kzinti",
+        item = "Sceptre Of Creation"
+    },
+    {
+        clue = "Bring me something truly exotic.",
+        plane = "Arcadia",
+        item = "Exotic Robes"
+    },
+    {
+        clue = "Bring me the blade of Karnath, intact preferably but I will take what I get.",
+        plane = "Karnath",
+        item = "Broken Blade Of Karnath"
+    },
+    {
+        clue = "Can domesticated frozen dogs be collared? Find out for me.",
+        plane = "Airscape",
+        item = "Ice Collar"
+    },
+    {
+        clue = "Dagger of the dead, what else would you expect a spirit to wield?",
+        plane = "Karnath",
+        item = "Netherworld Dagger"
+    },
+    {
+        clue = "Defeat a champion and bring me his sword.",
+        plane = "Outland",
+        item = "Black Sword Of The Keep"
+    },
+    {
+        clue = "Do wild ice hounds still get collared? Return with one if they do.",
+        plane = "Water",
+        item = "Ice Collar"
+    },
+    {
+        clue = "Do you think I would look good in sleeves of gold?",
+        plane = "Astral",
+        item = "Golden Sleeves"
+    },
+    {
+        clue = "Each Cabal member has a staff of office, bring me one.",
+        plane = "Astral",
+        item = "Sun Staff"
+    },
+    {
+        clue = "Even domesticated frozen dogs will yield their teeth.",
+        plane = "Airscape",
+        item = "Ice Hound's Tooth"
+    },
+    {
+        clue = "Find a bow that is truly worthy of firing ice arrows.",
+        plane = "Water",
+        item = "Ice Bow"
+    },
+    {
+        clue = "Find me some unfinished kzinti serum; I want to make Killaris jealous.",
+        plane = "Kzinti",
+        item = "Vial Of Unfinished Portal Serum"
+    },
+    {
+        clue = "Flaming blue balls doesn't sound like something I would want a pair of so just relieve the owner of one for me please.",
+        plane = "Arcadia",
+        item = "Seething Ball Of Blue Flame"
+    },
+    {
+        clue = "Gaius has interesting armor, heavy, but interesting.",
+        plane = "Stone",
+        item = "Stone Platemail"
+    },
+    {
+        clue = "Go and de-robe the mistress of the south.",
+        plane = "Outland",
+        item = "Dark Purple Robe"
+    },
+    {
+        clue = "Go play the ultimate game of hot potato in the realm of earth.",
+        plane = "Stone",
+        item = "Lavabomb"
+    },
+    {
+        clue = "Go play the ultimate game of hot potato in the realm of fire.",
+        plane = "Fire",
+        item = "Lavabomb"
+    },
+    {
+        clue = "Have you ever seen a katana dance? Neither have I. Please bring me this wonder.",
+        plane = "Arcadia",
+        item = "Dancing Katana"
+    },
+    {
+        clue = "Hmm, according to my list I need the fang of a snake of some sort, like a viper.",
+        plane = "Noctopia",
+        item = "Viper Fang"
+    },
+    {
+        clue = "I am not sure what use the Fae have for shield bracelets, get me one so I can take a look at it.",
+        plane = "Noctopia",
+        item = "Buckler Bracelet"
+    },
+    {
+        clue = "I can't decide if a steam gun would add to my collection or not.",
+        plane = "Air",
+        item = "Small Steam Gun"
+    },
+    {
+        clue = "I could use some custom made boots.",
+        plane = "Water",
+        item = "Pair Of Wind-Ravaged Boots"
+    },
+    {
+        clue = "I desire a kzinti incantation, hop to.",
+        plane = "Kzinti",
+        item = "Incantation Note"
+    },
+    {
+        clue = "I desire the bow of the air lord, be a dear and fetch it for me.",
+        plane = "Air",
+        item = "Aurora Bow"
+    },
+    {
+        clue = "I desire the mace of the earth lord. Be kind to an old dragon and fetch it for me please.",
+        plane = "Stone",
+        item = "Earthen Mace Of Might"
+    },
+    {
+        clue = "I don't know whether or not you will have to gather each feather individually, but I would like a cape of Durin feathers or the like.",
+        plane = "Arcadia",
+        item = "Cape Of Angel Feathers"
+    },
+    {
+        clue = "I doubt there are any happy bone shields but find one with some sort of emotion.",
+        plane = "Tarterus",
+        item = "Grim Bone Shield"
+    },
+    {
+        clue = "I find myself needing to purify a few sections of my hoard; perhaps a wand would aid me with this.",
+        plane = "Fire",
+        item = "Ritual Purification Wand"
+    },
+    {
+        clue = "I found a bare spot in my collection that would benefit from a plain staff, or staff of a plane.",
+        plane = "Tarterus",
+        item = "Staff Of The Lower Planes"
+    },
+    {
+        clue = "I have a leather restorer and preservative I would like to test on some leather armor that has seen better days.",
+        plane = "Astral",
+        item = "Decaying Vest Made From Cracked Leather"
+    },
+    {
+        clue = "I just want you to do a quick trip to Astral shift and grab me a guardian's weapon.",
+        plane = "Astral",
+        item = "Massive Slate-grey Sledgehammer"
+    },
+    {
+        clue = "I need you to go visit with the Demogorgon and see if you can purchase his whip, or maybe he would give it to me as a gift.",
+        plane = "Tarterus",
+        item = "Black Whip"
+    },
+    {
+        clue = "I probably wouldn't want to encounter bugs attached to green webbing, but a veil made of such stuff intrigues me.",
+        plane = "Astral",
+        item = "Green Web Veil"
+    },
+    {
+        clue = "I require a blindfold that has seen some action. Don't waste my time with the one that blind Fae wears.",
+        plane = "Karnath",
+        item = "Bloodstained Blindfold"
+    },
+    {
+        clue = "I still don't understand why a mage would wield a sledgehammer, maybe it has something to do with the black rock from which it is made.",
+        plane = "Kzinti",
+        item = "Obsidian Sledgehammer"
+    },
+    {
+        clue = "I think there might be some hidden information on a crumpled note on the Kzinti plane. Bring me this information.",
+        plane = "Kzinti",
+        item = "Crumpled Note"
+    },
+        {
+        clue = "I think there might be some hidden information on a crumpled note on the Kzinti plane.",
+        plane = "Kzinti",
+        item = "Crumpled Note"
+    },
+    {
+        clue = "I used to like to walk the straight and narrow line. Please bring me something that will help tell me where I'm going.",
+        plane = "Outland",
+        item = "Crystal Ball"
+    },
+    {
+        clue = "I would just love to get my hands on the cloak of the Ruler of the Water plane.",
+        plane = "Water",
+        item = "Storm-skin Cloak"
+    },
+    {
+        clue = "Imagine the most Goth wand possible then find it and bring it back to me.",
+        plane = "Outland",
+        item = "Black Wand With A Grinning Skull"
+    },
+    {
+        clue = "Is it there or isn't it? Your back will know when you encounter this blade.",
+        plane = "Noctopia",
+        item = "Ethereal Blade"
+    },
+    {
+        clue = "It is no katana, but it is still a dancing sword. Bring me this minor wonder.",
+        plane = "Arcadia",
+        item = "Dancing Rapier"
+    },
+    {
+        clue = "It isn't Oni's kit, maybe it should be mine.",
+        plane = "Noctopia",
+        item = "Omayra's Kit"
+    },
+    {
+        clue = "Let's sow a little discord; we just need the right weapon.",
+        plane = "Tarterus",
+        item = "Blade of Discord"
+    },
+    {
+        clue = "Madness and wickedness, Elaxor radiates both.",
+        plane = "Stone",
+        item = "Radiance Of Wickedness"
+    },
+    {
+        clue = "Malafont's armor, I want it.",
+        plane = "Noctopia",
+        item = "A Suit Of Dress Plate"
+    },
+    {
+        clue = "The master of death needs to lose his hood.",
+        plane = "Outland",
+        item = "Black Master's Hood"
+    },
+    {
+        clue = "Maybe if it was pure the elder wouldn't throw this clear thing around.",
+        plane = "Nowhere",
+        item = "Clear Psi-Blade"
+    },
+    {
+        clue = "One of them will definitely be blue when you bring me his blade.",
+        plane = "Nowhere",
+        item = "Blue Psi-Blade"
+    },
+    {
+        clue = "Minor illusions can be just as powerful as major ones. Bring me a minor illusionist's ring.",
+        plane = "Air",
+        item = "Ring Of Minor Imagery"
+    },
+    {
+        clue = "My collection needs a heartbane loaded weapon in case I ever want to slaughter foes.",
+        plane = "Astral",
+        item = "Pair Of Kzinti Slaughter Gloves"
+    },
+    {
+        clue = "My collection won't be complete without a way to tame death itself.",
+        plane = "Tarterus",
+        item = "Whip, \"Death-Tamer\""
+    },
+    {
+        clue = "My dagger set just won't be complete without a golden handled weapon capable of damaging werewolves.",
+        plane = "Outland",
+        item = "Silver Dagger With A Golden Handle"
+    },
+    {
+        clue = "My rock collection seems incomplete. See if you can turn up a blue or white stone for me.",
+        plane = "Astral",
+        item = "Blueish-White Stone"
+    },
+    {
+        clue = "No clerics have this aura, just the kzinti war leader.",
+        plane = "Kzinti",
+        item = "Aura Of Domination"
+    },
+    {
+        clue = "Peel the mark off of a madman.",
+        plane = "Stone",
+        item = "Mark Of Madness"
+    },
+    {
+        clue = "Pick me up a memento I can use to remember the Gith.",
+        plane = "Outland",
+        item = "Amulet With A Small Silver Sword Inscribed On It"
+    },
+    {
+        clue = "Please acquire custom made leggings made of panthrodrine. I wear a size 30.",
+        plane = "Tarterus",
+        item = "Panthrodrine-Skin Leggings"
+    },
+    {
+        clue = "Pluck a phoenix for me please.",
+        plane = "Fire",
+        item = "Flaming Phoenix Feather"
+    },
+    {
+        clue = "Pry the frozen tooth from a wild hound.",
+        plane = "Water",
+        item = "Ice Hound's Tooth"
+    },
+    {
+        clue = "Retrieve a dark energy lance for me.",
+        plane = "Fire",
+        item = "Devilish Lance"
+    },
+    {
+        clue = "Show me how loyal you can be.",
+        plane = "Karnath",
+        item = "Show Of Loyalty"
+    },
+    {
+        clue = "Silk and velvet, but it is still just a dress of rags.",
+        plane = "Noctopia",
+        item = "Dress Of Silk And Velvet Rags"
+    },
+    {
+        clue = "Skewer me something from the Orb.",
+        plane = "Noctopia",
+        item = "Glowing Iron Skewer"
+    },
+    {
+        clue = "Skin a rock wyrm for me please.",
+        plane = "Stone",
+        item = "Shaleskin Arm Guard"
+    },
+    {
+        clue = "Some merrily dancing fire would be appreciated.",
+        plane = "Arcadia",
+        item = "Baleflame"
+    },
+    {
+        clue = "Something easy this time? Just grab Ralthar's weapon for me.",
+        plane = "Fire",
+        item = "Steel Broadsword"
+    },
+    {
+        clue = "The location of the disc I want is considered a secret by some.",
+        plane = "Midgaard",
+        item = "Stone Disc"
+    },
+    {
+        clue = "The monks are guarding something. Have a \"talk\" with Harold and see what you can bring me.",
+        plane = "Thorngate",
+        item = "Red Bracer"
+    },
+    {
+        clue = "The thing I desire from you mostly resembles a spear, though it hardly qualifies.",
+        plane = "Kzinti",
+        item = "Crude Spear"
+    },
+    {
+        clue = "These feathers may try to elude you but I expect you to get them for me anyway.",
+        plane = "Arcadia",
+        item = "Whirl Of Elusive Feathers"
+    },
+    {
+        clue = "Though the item would make one think otherwise, I would be eternally happy if you were to gather a clasp for me.",
+        plane = "Fire",
+        item = "Clasp Of Eternal Anguish",
+        keyword = "clasp anguish lordgear"
+    },
+    {
+        clue = "Thy task involves an axe. Four shalt thou not count, neither count thou two.",
+        plane = "Tarterus",
+        item = "Axe Of The Third Plane"
+    },
+    {
+        clue = "Try not to get eaten while retrieving a dha for me.",
+        plane = "Karnath",
+        item = "Iron Dha"
+    },
+    {
+        clue = "Try not to lose anything yourself while gathering a green blade for me.",
+        plane = "Nowhere",
+        item = "Green Psi-Blade"
+    },
+    {
+        clue = "Turning big rocks into little rocks by having big rocks wield little rocks I reckon could be useful.",
+        plane = "Water",
+        item = "Stone Hammer"
+    },
+    {
+        clue = "Turning big rocks into little rocks by having big rocks wield little rocks, what madness.",
+        plane = "Stone",
+        item = "Rock Hammer"
+    },
+    {
+        clue = "Unicorn horns are said to possess great magic. I want one to test out the properties it possesses.",
+        plane = "Air",
+        item = "Unicorn Horn"
+    },
+    {
+        clue = "What else would you call a flametongue?",
+        plane = "Kzinti",
+        item = "Flametongue Called 'Firebrand'"
+    },
+    {
+        clue = "I refuse to add dancing butter knives to my collection. I am drawing the line at a dagger.",
+        plane = "Arcadia",
+        item = "Dancing Dagger"
+    },
+    -- sometimes just says it this way:
+    {
+        clue = "I am drawing the line at a dagger.",
+        plane = "Arcadia",
+        item = "Dancing Dagger"
+    },
+    {
+        clue = "Where's the beef? Actually, I prefer some venison.",
+        plane = "Thorngate",
+        item = "Side Of Venison"
+    },
+    {
+        clue = "Which is mightier, earth or air? Bring me a gun where one pushes the other around.",
+        plane = "Air",
+        item = "Air Gun"
+    },
+    {
+        clue = "Why the senior has to dance with yellow I will never know. He has two so it shouldn't hurt him too bad to give one up.",
+        plane = "Nowhere",
+        item = "Yellow Psi-Blade"
+    },
+    {
+        clue = "Would you please bring me a talisman of evil? Something an evil witch or hag would hold onto.",
+        plane = "Astral",
+        item = "Devilish Talisman"
+    },
+    {
+        clue = "You don't have to learn the actual ritual, just get an implement used in dark rites.",
+        plane = "Karnath",
+        item = "Dagger Of Dark Rites"
+    },
+    {
+        clue = "You don't look to be all that skilled at basket weaving but perhaps you could make something nice from some gith hair.",
+        plane = "Outland",
+        item = "Assassin's Armband"
+    },
+    {
+        clue = "You might have to bleed a bit to get the red just right on the robe I would like you to gather for me.",
+        plane = "Outland",
+        item = "Blood Red Robe"
+    },
+    {
+        clue = "You will have to jump through a few hurdles but I know you have it in you to find a faerie script for my collection.",
+        plane = "Thorngate",
+        item = "Faerie Script"
+    },
+    {
+        clue = "You will probably have to get them custom made, but I would like some coarse leather boots.",
+        plane = "Noctopia",
+        item = "Coarse Leather Boots"
+    },
+    {
+        clue = "You would think that the boy will know you are coming to take his prophetic staff away and give it to me.",
+        plane = "Water",
+        item = "Staff Of Prophecy"
+    },
+    {
+        clue = "Do not be oblivious to the signs leading to the item I desire.",
+        plane = "Fire",
+        item = "Signet Of The Oblivious Defender"
+    },
+    -- Add more data entries here
+}
+
+-- Function to search for the item and plane based on a given clue
+function findItemAndPlane(clue)
+    for _, entry in ipairs(AllegItems) do
+        if clue == entry.clue then
+            return entry.item, entry.plane
+        end
+    end
+    return nil, nil  -- Clue not found
+end
+
+function checkItemIsAlleg(item)
+  local alleg_item
+  item = string.lower(item)
+
+  for _, entry in pairs(AllegItems) do
+    alleg_item = string.lower(entry.item)
+    if item == alleg_item then return true end
+  end
+  
+  return false
+end
+
+local AllegKeywordTable = {
+  ["amulet with a small silver sword inscribed on it"] = "amulet silver sword inscribed",
+
+
+}
+
+function getAllegKeyword(item)
+ -- some items are too hard to determine their keywords based on the trick below, in that case use the table above
+ -- if we have the item in the lookup table, return it's keyword
+ --if AllegKeywordTable[item] then return AllegKeywordTable[item] end
+
+ -- otherwise, the below does a good job of determining most alleg item's keywords without having to have every item in the lookup table
+ item = string.lower(item)
+ item = " " .. item .. " "
+ item = string.gsub(item, " of ", " ")
+ item = string.gsub(item, " the ", " ")
+ item = string.gsub(item, " with ", " ")
+ item = string.gsub(item, " a ", " ")
+ item = string.gsub(item, " on ", " ")
+ item = string.gsub(item, " it ", " ")
+ item = string.gsub(item, " small ", " ")
+ item = string.gsub(item, " called ", " ")
+ item = string.gsub(item, " pair ", " ")
+ item = string.gsub(item, " heavy ", "")
+ item = string.gsub(item, "broadsword", "broad sword")
+ item = string.gsub(item, "shard%-embedded", "shard")
+ item = string.gsub(item, "devilish", "devil")
+ item = string.gsub(item, "seething", "blaze")
+ item = string.gsub(item, "blueish", "bluish")
+ item = string.gsub(item, "eternal anguish", "anguish")
+ item = string.gsub(item, "%'s", "")
+ item = string.gsub(item, "'", "")
+ --item = string.gsub(item, " -", " ")
+ item = string.gsub(item, '^%s*(.-)%s*$', '%1')
+ return item
+end
+
+
+
+</script>
+						<eventHandlerList />
+					</Script>
+					<Script isActive="yes" isFolder="no">
+						<name>Time Functions</name>
+						<packageName></packageName>
+						<script>function getServerTime(TimeZone)
+  if not TimeZone then send("time", false); return os.time() end -- if "time" has never been used, will need to run it the first time
+
+  local local_time = os.time()
+  local server_time = local_time - (TimeZone * 3600)
+  
+  return server_time
+end
+
+function calculateDaysBetweenTimes(Time1, Time2)
+    -- Get the number of seconds in a day
+    local secondsInDay = 24 * 60 * 60
+
+    -- Calculate the absolute time difference in seconds
+    local timeDifference = math.abs(Time2 - Time1)
+
+    -- Calculate the number of full days between the two timestamps
+    local days = math.floor(timeDifference / secondsInDay)
+
+    -- Check if Time1 is ahead of Time2 (past midnight)
+    local date1 = os.date("*t", Time1)
+    local date2 = os.date("*t", Time2)
+
+    -- Convert both dates to the same day before performing the comparison
+    local sameDayTime1 = os.time({year=date2.year, month=date2.month, day=date2.day, hour=date1.hour, min=date1.min, sec=date1.sec})
+
+    if sameDayTime1 &gt; Time2 then
+        -- Adjust days count if Time1 is past midnight
+        days = days + 1
+    end
+
+    return days
+end
+
+function IsMDAY()
+  assert(AltList.TimeZone)
+  return (os.date('%d', getServerTime(AltList.TimeZone)) == "06")
+end
+
+</script>
+						<eventHandlerList />
+					</Script>
+					<Script isActive="yes" isFolder="no">
+						<name>Helper functions</name>
+						<packageName></packageName>
+						<script>function TableSize(t)
+  if type(t) ~= "table" then error("TableSize() requires a table as an argument") end
+  local count = 0
+  for _ in pairs(t) do count = count + 1 end
+  return count
+end
+
+function deepcopy(o, seen)
+  seen = seen or {}
+  if not o  then return nil end
+  if seen[o] then return seen[o] end
+
+  local no
+  if type(o) == 'table' then
+    no = {}
+    seen[o] = no
+
+    for k, v in next, o, nil do
+      no[deepcopy(k, seen)] = deepcopy(v, seen)
+    end
+    setmetatable(no, deepcopy(getmetatable(o), seen))
+  else -- number, string, boolean, etc
+    no = o
+  end
+  return no
+end
+
+function format_int(number)
+  -- Handle non-numeric inputs
+  if type(number) ~= "number" then
+    return "format_int(): invalid input"
+  end
+
+  local str = tostring(number)
+  local minus, int, fraction = str:match('([-]?)(%d+)([.]?%d*)') -- first tries to match optional negative sign, then captures whole number, then captures optional decimal
+
+  -- Insert commas for thousands, millions, etc.
+  local formatted = ""
+  local length = #int
+  for i = 1, length do
+    formatted = formatted .. int:sub(i, i)
+    if (length - i) % 3 == 0 and i ~= length then
+      formatted = formatted .. ","
+    end
+  end
+
+  return minus .. formatted .. fraction
+end
+
+function showCmdSyntax(cmd_name, syntax_tbl, showCmdColour)
+  if type(cmd_name) ~= "string" or type(syntax_tbl) ~= "table" then
+    error("showCmdSyntax: Invalid inputs (expected string, table)")
+    return false
+  end
+  
+  showCmdColour = showCmdColour or "white" -- https://wiki.mudlet.org/images/c/c3/ShowColors.png
+  
+  cecho("&lt;"..showCmdColour.."&gt;"..cmd_name.."\n")
+  cecho("&lt;"..showCmdColour.."&gt;---------------------------------------------------------------------------------------\n")
+  for _, v in ipairs(syntax_tbl) do
+    local dash = (v[1] and v[2]) and "- " or "  "
+    local formatStr = string.format("&lt;%s&gt;%-31s%s\n", showCmdColour, v[1] and " " .. v[1] or "", dash .. (v[2] or ""))
+    cecho(formatStr)
+  end
+  cecho("&lt;"..showCmdColour.."&gt;---------------------------------------------------------------------------------------\n")
+end
+
+function VictoryBeep()
+  playSoundFile({name = getMudletHomeDir() .. "/Vagonuth-Inventory-Mgmt/victorybeep.mp3", volume = 75})
+end
+
+function printGameMessage(title, message, colour, colour_message)
+  colour = colour or "white"
+  colour_message = colour_message or ("ansi_" .. colour)
+  
+  local formatStr = string.format("&lt;%s&gt;%s&lt;%s&gt;: %s\n", colour, title, colour_message, message)
+  if StaticVars and StaticVars.GameMsgsChatOutput then
+    cecho(StaticVars.GameMsgsChatOutput, formatStr)
+  else
+    cecho(formatStr)
+  end
+end
+
+function printMessage(title, message, colour)
+  colour = colour or "white"
+  
+  local formatStr = string.format("&lt;%s&gt;%s&lt;ansi_%s&gt;: %s\n", colour, title, colour, message)
+  cecho(formatStr)
+end
+
+function Connected()
+  local _, _, ret = getConnectionInfo()
+  return ret
+end
+
+function splitArgumentIntoTwo(input)
+    local arg1, arg2
+
+    -- Check for both "words" enclosed in single quotes
+    local match1, match2 = input:match("^'(.-)'%s+'(.-)'$")
+    if match1 and match2 then
+        arg1 = "'" .. match1 .. "'"
+        arg2 = "'" .. match2 .. "'"
+    else
+        -- Check for the pattern with the first "word" in single quotes
+        match1, match2 = input:match("^'(.-)'%s+(%S+)$")
+        if match1 and match2 then
+            arg1 = "'" .. match1 .. "'"
+            arg2 = match2
+        else
+            -- Check for the pattern with the second "word" in single quotes
+            match1, match2 = input:match("^(%S+)%s+'(.-)'$")
+            if match1 and match2 then
+                arg1 = match1
+                arg2 = "'" .. match2 .. "'"
+            else
+                -- Check for the pattern with exactly two words
+                match1, match2 = input:match("^(%S+)%s+(%S+)$")
+                if match1 and match2 then
+                    arg1 = match1
+                    arg2 = match2
+                else
+                    -- Check for a single word
+                    match1 = input:match("^(%S+)$")
+                    if match1 then
+                        arg1 = match1
+                    else
+                        -- Return an error if no pattern matches
+                        return nil, "Invalid input format. Use one or two words, or enclose multiple words in single quotes."
+                    end
+                end
+            end
+        end
+    end
+
+    return arg1, arg2
+end
+
+
+</script>
+						<eventHandlerList />
+					</Script>
+					<Script isActive="yes" isFolder="no">
+						<name>wait-And-waitline</name>
+						<packageName></packageName>
+						<script>local threads = {}
+function wait(seconds)
+    local name = "wait_"..tostring(math.random(1000, 999999))
+    threads[name] = coroutine.running()
+    if threads[name] == nil then
+        cecho("&lt;red&gt;wait(): your code needs to be inside coroutine.wrap\n")
+        return false
+    end
+    tempTimer(seconds, "wait_resume('"..name.."')")
+    return coroutine.yield()
+end
+
+function wait_resume(name)
+    local thread = (threads or {})[name]
+    if thread == nil then
+        cecho("&lt;red&gt;wait(): coroutine thread not found, coroutine lost\n")
+        return false
+    end
+    threads[name] = nil
+    local success,msg = coroutine.resume(thread)
+    if success == false then
+        cecho("&lt;red&gt;wait(): "..msg.."\n")
+        cecho("&lt;orange&gt;details: "..debug.traceback(thread).."\n")
+        return false
+    end
+    return true
+end
+
+function wait_line(patterns, timeout, action)
+    local name = "wait_line_"..tostring(math.random(1000, 999999))
+    threads[name] = { coroutine.running() }
+    if threads[name][1] == nil then
+        cecho("&lt;red&gt;wait_line(): your code needs to be inside coroutine.wrap\n")
+        return false
+    end
+    threads[name][2] = {}
+    if type(patterns) == "table" and #patterns &gt; 0 then
+        threads[name][4] = {}
+        for i=#patterns,1,-1 do
+            threads[name][2][i] = tempRegexTrigger(patterns[i], "multi_line_trigger('"..name.."', "..i..", "..#patterns..")", 1)
+            disableTrigger(threads[name][2][i])
+        end
+        enableTrigger(threads[name][2][1])
+    elseif type(patterns) == "string" then
+        threads[name][2][1] = { tempRegexTrigger(patterns, "single_line_trigger('"..name.."')", 1) }
+    else
+        cecho("&lt;red&gt;wait_line(): specified pattern type is incorrect\n")
+        return false
+    end
+    if timeout &gt; 0 then
+        local timer_id = tempTimer(timeout, "wait_line_timer('"..name.."')")
+        threads[name][3] = function() disableTimer(timer_id) killTimer(timer_id) end
+    else
+        threads[name][3] = function() end
+    end
+    if action then send(action) end
+    return coroutine.yield() or false
+end
+
+function wait_line_resume(name)
+    local thread = ((threads or {})[name] or {})[1]
+    if thread == nil then
+        cecho("&lt;red&gt;wait_line(): coroutine thread not found, coroutine lost\n")
+        return false
+    end
+    if coroutine.status(thread) == "suspended" then
+        local args = threads[name][4]
+        threads[name] = nil
+        local success,msg = coroutine.resume(thread, args)
+        if success == false then
+            cecho("&lt;red&gt;wait_line(): "..msg.."\n")
+            cecho("&lt;orange&gt;details: "..debug.traceback(thread).."\n")
+        end
+    else
+        tempTimer(0, "wait_line_resume('"..name.."')")
+    end
+end
+
+function single_line_trigger(name)
+    threads[name][3]()
+    threads[name][4] = matches
+    wait_line_resume(name)
+end
+
+function multi_line_trigger(name, n, m)
+    if n == m then
+        threads[name][3]()
+        threads[name][4][n] = matches
+        wait_line_resume(name)
+    else
+        threads[name][4][n] = matches
+        enableTrigger(threads[name][2][n+1])
+    end
+end
+
+function wait_line_timer(name)
+    for _,v in ipairs(threads[name][2]) do
+        for _,i in ipairs(v) do
+            disableTrigger(i)
+            killTrigger(i)
+        end
+    end
+    wait_line_resume(name)
+end</script>
+						<eventHandlerList />
+					</Script>
+				</ScriptGroup>
+				<Script isActive="yes" isFolder="no">
+					<name>Inventory List</name>
+					<packageName></packageName>
+					<script>-- Dependencies: 
+-- + wait and wait line package installed
+-- + Table and Array Functions: deepcopy(), TableSize()
+
+InventoryList = InventoryList or {}
+InventoryList.Items = InventoryList.Items or {}
+InventoryList.Items._BagNames = InventoryList.Items._BagNames or {}
+
+InventoryList.LoginName = InventoryList.LoginName or nil
+
+OnLocker = OnLocker or {}
+OnLocker.isOpen = OnLocker.isOpen or false
+OnLocker.len = OnLocker.len or 0
+OnLocker.LockerArray = OnLocker.LockerArray or {}
+
+
+function InventoryList.Save()
+  local location = getMudletHomeDir() .. "/InventoryList.lua"
+  table.save(location, InventoryList.Items)
+end
+
+function InventoryList.Load()
+  local location = getMudletHomeDir() .. "/InventoryList.lua"
+  if io.exists(location) then
+    table.load(location, InventoryList.Items)
+  end
+end
+
+if TableSize(InventoryList.Items) &lt;= 1 then InventoryList.Load() end
+sendGMCP("Char.Group.List")
+sendGMCP("Char.Status")
+sendGMCP("Char.Vitals")
+
+function InventoryList.GetCharName()
+  sendGMCP("Char.Group.List")
+  
+  if InventoryList.LoginName then
+    return InventoryList.LoginName
+  end
+
+  local char_name = string.lower(gmcp.Char.Status.character_name):gsub("^%l", string.upper)
+
+  if char_name == "" then error("gmcp.Char.Status.character_name not returning character name"); return nil end
+
+  -- Sometimes gmcp.Char.Status bugs out and requires a relog. We can check this against gmcp.Char.Group.List
+  for _,Player in ipairs(gmcp.Char.Group.List) do
+    if Player.name == char_name then
+      return char_name
+    end
+  end
+  
+  cecho("&lt;yellow&gt;Vagonuth-Inventory-Mgmt error: &lt;white&gt;could not get character name, gmcp returning &lt;red&gt;" .. char_name .. "\n")
+  cecho("If this is different than the name you logged in with, try reconnecting to AVATAR\n")
+  cecho("If your char_name is correct, try running the command again\n\n")
+
+  error("gmcp.Char.Status is not matching gmcp.Char.Group")
+  return nil
+end
+
+function RemoveColourCodes(name)
+    -- Remove sequences that start with \27 followed by [ and then has one or more digits, a semicolon, again one or more digits and ends with an 'm'
+    local stripped = string.gsub(name, "\27%[%d+;%d+m", "")
+
+    -- Remove sequences that start with \27
+    stripped = string.gsub(stripped, "\27", "")
+
+    -- Remove squares that have |xX| colour stripAnsiCodes
+    stripped = string.gsub(stripped,"|%w+|","")
+
+    return stripped
+end
+
+-- request_items should be called externally with InventoryList.UpdateItems("inv", (true|false))
+-- will call itself recursively to look in containers
+-- optional arg is so that the container's name (rather than id number) is used when saving to the array
+InventoryList.UpdateItemsLock = InventoryList.UpdateItemsLock or false
+function InventoryList.UpdateItems(loc_type, echo, ...)
+  if not Connected() then return end
+  if gmcp.Char and gmcp.Char.Status and gmcp.Char.Status.level and tonumber(gmcp.Char.Status.level) &gt; 125 then
+    if echo then cecho("&lt;red&gt;Inventory Manager doesn't track legendary items\n") end
+    return
+  end
+  -- Will not allow iupdate to be called twice within 10 seconds
+  if loc_type == "inv" then
+    if InventoryList.UpdateItemsLock then return end
+    InventoryList.UpdateItemsLock = true
+    tempTimer(10, function() InventoryList.UpdateItemsLock = false end)
+  end
+  
+  local char_name = InventoryList.GetCharName()
+  
+  InventoryList.Items[char_name] = InventoryList.Items[char_name] or {}
+  
+  -- Code that will only be run on the parent level call (and not the recursive calls)
+  if loc_type == "inv" then
+    -- Delete all the saved inventory since we're updating the list (except for lockers)
+    for k, _ in pairs(InventoryList.Items[char_name]) do
+      if k ~= "locker" then InventoryList.Items[char_name][k] = {} end
+    end
+    tempTimer(15, function() InventoryList.Save() end) 
+  end
+    
+  coroutine.wrap(function()
+    local timeout = 1
+    local request = "Char.Items.Inv"
+    local tmparray
+    local tmpnamearray = {}
+    
+    assert(loc_type == "inv" or tonumber(loc_type)~= nil, "InventoryList.UpdateItems(): invalid args, should be inv or container id #")
+
+    if tonumber(loc_type)~= nil then 
+      request = "Char.Items.Contents " .. loc_type
+    end
+
+    repeat
+      sendGMCP(request)
+      timeout = timeout + 1
+      wait(1)
+    until (gmcp.Char.Items.List.location == loc_type or timeout &gt;= 10)
+    
+    if (timeout &gt;= 10) then
+      -- Searching containers within containers (eg jeweled scabbard) causes a timeout, assuming mud doesn't allow it
+      -- Can also timeout if too many items are in one container
+      print("InventoryList.UpdateItems(): timed out after trying " .. timeout .. " times (once per second)" .. (arg.n == 1 and " " .. arg[1] or ""))
+      print("InventoryList.UpdateItems(): can happen if too many items are in one container")
+      
+      
+      return false
+    else
+      tmparray = deepcopy(gmcp.Char.Items.List.items)
+      
+      -- Remove colour codes from item names
+      for _, y in ipairs(tmparray) do
+        y.name = RemoveColourCodes(y.name)
+      end
+      
+      -- Game doesn't seem to respond to a request of looking inside of a container that's already insider another container so we won't even try
+      if (loc_type == "inv") then -- we'll only look at containers that are in our inventory and open
+        if echo then print("Inventory Update: Looking in your inventory") end
+        for _, y in ipairs(tmparray) do
+          if y.type == "container" and y.state == "open" then
+            if echo then print("Inventory Update: Looking in container " .. y.name) end
+            InventoryList.UpdateItems(y.id, echo, y.name)
+          end   
+        end
+      end 
+      
+      -- If we're looking in a bag, arg[1] will be the bag name. Save it to bag_list
+      if arg.n == 1 then
+        InventoryList.Items._BagNames[loc_type] = arg[1]
+        InventoryList.Items[char_name][loc_type] = deepcopy(tmparray)
+      else
+        InventoryList.Items[char_name][loc_type] = deepcopy(tmparray)
+      end
+      if echo then print("Inventory Update: Finished updating items in " .. (loc_type == "inv" and "your inventory" or arg[1])) end
+      return true
+    end
+    
+  end)()
+end
+
+function InventoryList.Search(tbl, search)
+  assert(type(search)=="string")
+  search = string.lower(search)
+  local locations = {}
+  for k, v in pairs(tbl) do
+    if type(v) == "table" then
+      for _, loc in ipairs(InventoryList.Search(v, search)) do
+        table.insert(locations, {k, unpack(loc)})
+      end
+    elseif k == "name" and type(v) == "string" and string.find(string.lower(v), search, 1, true) then
+      table.insert(locations, {v})
+    end
+  end
+  return locations
+end
+
+function InventoryList.SearchReport(str, exclude_charname)
+  local report = InventoryList.Search(InventoryList.Items, str)
+
+  if #report == 0 then
+    cecho("&lt;red&gt;No items by that name found!&lt;reset&gt;\n")
+    return false
+  end
+
+  local exclude_name = exclude_charname and GMCP_name(exclude_charname) or nil
+
+  for _, v in ipairs(report) do
+    if not (exclude_name and v[1] == exclude_name) then
+      local location = v[2] == "inv" and "inventory" or (v[2] == "locker" and "&lt;blue&gt;Locker&lt;reset&gt;") or ("bag &lt;purple&gt;" .. (InventoryList.Items._BagNames[v[2]] and InventoryList.Items._BagNames[v[2]] or v[2]) .. "&lt;reset&gt;")
+      cecho("&lt;white&gt;" .. v[1] .. "&lt;ansi_white&gt; has &lt;yellow&gt;" .. v[4] .. "&lt;ansi_white&gt; in their " .. location .. "\n")
+    end
+  end
+
+  return true
+end
+
+function InventoryList.SearchReportLevel(str, level)
+  level = tonumber(level)
+  if level == nil or level &lt; 1 or level &gt; 250 then
+    cecho("&lt;red&gt;Please choose a level between 1 and 250\n")
+    return
+  end
+
+  local report = InventoryList.Search(InventoryList.Items, str)
+  
+  if #report == 0 then
+    cecho("&lt;red&gt;No items by that name found!&lt;reset&gt;\n")
+    return false
+  end
+  
+  for _, v in ipairs(report) do
+    if not AltList.Chars[v[1]] then
+      cecho("&lt;red&gt;Please login in with " .. v[1] .. " and run the \"score\" command\n")
+    elseif AltList.Chars[v[1]].Level == level then
+      local location = v[2] == "inv" and "inventory" or (v[2] == "locker" and "&lt;blue&gt;Locker&lt;reset&gt;") or ("bag &lt;purple&gt;" .. (InventoryList.Items._BagNames[v[2]] and InventoryList.Items._BagNames[v[2]] or v[2]) .. "&lt;reset&gt;")
+      cecho("&lt;white&gt;" .. v[1] .. "&lt;ansi_white&gt; has &lt;yellow&gt;" .. v[4] .. "&lt;ansi_white&gt; in their " .. location .. "\n")
+    end
+  end
+
+end
+
+
+function InventoryList.QuickSearch(str)
+  local report = InventoryList.Search(InventoryList.Items, str)
+  
+  if #report == 0 then return "" end
+
+  return report[1][1]
+end
+
+function InventoryList.CountReport(str, exclude_charname)
+  local report = InventoryList.Search(InventoryList.Items, str)
+  if #report == 0 then print("No items by that name found!") ; return false end
+  
+  local exclude_name = exclude_charname and GMCP_name(exclude_charname) or nil
+
+  local count_report = {}
+
+  for _, v in ipairs(report) do
+    if not (exclude_name and v[1] == exclude_name) then
+      if count_report[v[4]] == nil then
+        count_report[v[4]] = 1
+      else
+        count_report[v[4]] = count_report[v[4]] + 1
+      end
+    end
+  end
+  
+  for k, v in pairs(count_report) do
+    cecho("&lt;white&gt;" .. v .. "&lt;ansi_white&gt; x\t&lt;yellow&gt;" .. k .. "\n")
+   end
+end
+
+function InventoryList.CountReportLevel(str, level)
+  level = tonumber(level)
+  if level == nil or level &lt; 1 or level &gt; 250 then
+    cecho("&lt;red&gt;Please choose a level between 1 and 250\n")
+    return
+  end
+  
+  local report = InventoryList.Search(InventoryList.Items, str)
+  if #report == 0 then print("No items by that name found!") ; return false end
+  
+  local count_report = {}
+
+  for _, v in ipairs(report) do
+    if not AltList.Chars[v[1]] then
+      cecho("&lt;red&gt;Please login in with " .. v[1] .. " and run the \"score\" command\n")
+    elseif AltList.Chars[v[1]].Level == level then
+      if count_report[v[4]] == nil then
+        count_report[v[4]] = 1
+      else
+        count_report[v[4]] = count_report[v[4]] + 1
+      end
+    end
+  end
+  
+  for k, v in pairs(count_report) do
+    cecho("&lt;white&gt;" .. v .. "&lt;ansi_white&gt; x\t&lt;yellow&gt;" .. k .. "\n")
+   end
+end
+
+function InventoryList.HaveItem(str)
+  local report = InventoryList.Search(InventoryList.Items, str)
+  if #report == 0 then return false else return true end
+end
+
+function InventoryList.AddLocker(tbl)
+  assert(type(tbl) == "table")
+  local char_name = InventoryList.GetCharName()
+  InventoryList.Items[char_name]["locker"] = {}
+  InventoryList.Items[char_name]["locker"] = deepcopy(tbl)
+  InventoryList.Save()
+  return true
+end
+
+function InventoryList.ReportLockers()
+  cecho("&lt;white&gt;Locker Report\n")
+  cecho("&lt;white&gt;-----------------------------------------\n")
+  
+  local total = 0
+  local name_list = {}
+  for name, _ in pairs(InventoryList.Items) do
+    if InventoryList.Items[name].locker and #InventoryList.Items[name].locker &gt; 0 then
+      table.insert(name_list, name)
+      total = total + 1
+    end
+  end
+  
+  table.sort(name_list)
+  
+  for _, name in ipairs(name_list) do
+    colour = "&lt;white&gt;"
+    if name == InventoryList.LoginName then
+      colour = "&lt;yellow&gt;"
+    end
+    cecho(colour .. name .. "\n")
+  end
+  
+  cecho("&lt;white&gt;-----------------------------------------\n")
+  cecho("&lt;white&gt;Total: " .. total .. "\n")
+  cecho("&lt;white&gt;-----------------------------------------\n")
+
+end
+
+function InventoryList.ItemsOnHand(str)
+  local report = InventoryList.Search(InventoryList.Items, str)
+  return #report
+end
+
+local VaultHunter = {
+["Orb Of Bravery"] = 5,
+["Astral Powder"] = 5,
+["Crown of Crystal"] = 2,
+["Treaty Of Purity Of Faith"] = 3,
+["Amulet of the Cat's Eye"] = 3,
+["Green Silken Sarong"] = 3,
+["Jade Bracer"] = 1,
+["Rod Of The Wicked Rulers"] = 2,
+["Necklace Of Severed Fae Ears"] = 2,
+["Silver Iguana"] = 1,
+["Floating Circle of Books"] = 2,
+["Amulet of Guiding Wind"] = 1,
+["Orb Of Gith"] = 3,
+["Armband Of The Unseen"] = 1,
+["Exaltra's Mirror"] = 1,
+["Naeadonna's Choker"] = 1,
+["Yorimandil's Blindfold"] = 1,
+["Sandblasted Emerald"] = 2,
+["Majestre's Crop"] = 1
+
+}
+
+function InventoryList.VaultHunter(char_name)
+  local tblReport = {{"Item", "Who has it?", "On Hand (Req'd)"}}
+  
+  local InventorySearchTable = InventoryList.Items
+  if char_name and char_name ~= "" and InventoryList.Items[string.lower(char_name):gsub("^%l", string.upper)] then
+    InventorySearchTable = InventoryList.Items[string.lower(char_name):gsub("^%l", string.upper)]
+  else
+    char_name = nil
+  end
+    
+
+  for item_name, num_reqd in pairs(VaultHunter) do
+    local itemsReport = InventoryList.Search(InventorySearchTable, item_name)
+    local x = #itemsReport .. " (" .. num_reqd .. ")"
+
+    -- Determine the color based on the required amount
+    if #itemsReport  &gt;= num_reqd then
+      x = "    &lt;green&gt;" .. x
+    else
+      x = "    &lt;yellow&gt;" .. x
+    end
+
+    if #itemsReport &gt; 0 then
+      table.insert(tblReport, {item_name, (char_name and string.lower(char_name):gsub("^%l", string.upper) or itemsReport[1][1]), x})  -- Report the first character who has the item
+    else
+      table.insert(tblReport, {item_name, "", x})  -- No character has it
+    end
+  end
+
+  -- Call FormatReportXCol with appropriate arguments, using nil for color
+  AltList.FormatReportXCol(3, {-35, -20, -20}, "Vault Hunter Report", tblReport, nil)
+end
+
+function InventoryList.ThiefHunter()
+  local ThiefHunter = {
+    ["glazed gith hide"] = 1,
+    ["soft nubuc hide"] = 1,
+    ["embossed hide"] = 1,
+    ["whole hide of a merman"] = 1,
+    ["hide of an unlucky human"] = 1  
+  }
+  
+  local tblReport = {{"Item", "Who has it?", "On Hand (Req'd)"}}
+
+  for item_name, num_reqd in pairs(ThiefHunter) do
+    local itemsReport = InventoryList.Search(InventoryList.Items, item_name)
+    local x = #itemsReport .. " (" .. num_reqd .. ")"
+    
+    -- Determine the color based on the required amount
+    if #itemsReport &gt;= num_reqd then
+      x = "    &lt;green&gt;" .. x
+    else
+      x = "    &lt;yellow&gt;" .. x
+    end
+    
+    if itemsReport and #itemsReport &gt; 0 then
+      table.insert(tblReport, {item_name, itemsReport[1][1], x})
+    else
+      table.insert(tblReport, {item_name, "", x})
+    end
+  end
+
+  -- Call FormatReportXCol with appropriate arguments, using nil for color
+  AltList.FormatReportXCol(3, {-30, -20, -20}, "Thief Hunter Report", tblReport)
+end
+
+
+function moveItemsBetweenBags(BagOne, BagTwo)
+    local BagOne = BagOne or "2.vault"
+    local BagTwo = BagTwo or "vault"
+
+    local function moveItem(item, quantity)
+        for i = 1, quantity do
+            send("get '" .. item .. "' " .. BagOne)
+            send("put '" .. item .. "' " .. BagTwo)
+        end
+    end
+
+    for item_name, quantity in pairs(VaultHunter) do
+        local keyword
+        if item_name == "Orb Of Bravery" then
+            keyword = "bravery"
+        elseif item_name == "Orb Of Gith" then
+            keyword = "gith"
+        elseif item_name == "Amulet of Guiding Wind" then
+            keyword = "guiding"
+        elseif item_name == "Amulet of the Cat's Eye" then
+            keyword = "cat eye"
+        elseif item_name == "Silver Iguana" then
+            keyword = "silver iguana"
+        else
+            keyword = string.lower(item_name:match("^([^%s']+)'?"))
+        end
+
+        moveItem(keyword, quantity)
+    end
+end
+
+function turnInTreasureHunter()
+  coroutine.wrap(function()   
+    for item_name, quantity in pairs(VaultHunter) do
+        local keyword
+        if item_name == "Orb Of Bravery" then
+            keyword = "bravery"
+        elseif item_name == "Orb Of Gith" then
+            keyword = "gith"
+        elseif item_name == "Amulet of Guiding Wind" then
+            keyword = "guiding"
+        elseif item_name == "Amulet of the Cat's Eye" then
+            keyword = "cat"
+        else
+            keyword = string.lower(item_name:match("^([^%s']+)'?"))
+        end
+  
+        for i = 1, quantity do
+          send("give " .. keyword .. " demon")
+          wait(5.5)
+        end
+    end
+
+  end)()
+end
+
+
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>AltList</name>
+					<packageName></packageName>
+					<script>-- Mudlet LUA script to track alts and their stats
+-- Tracks gold, pracs, QP, insigs, and alleg turn ins
+
+-- + Table and Array Functions: deepcopy(), TableSize()
+
+AltList = AltList or {}
+AltList.Chars = AltList.Chars or {}
+
+AltList.TimeZone = AltList.TimeZone or 0
+AltList.LoginName = AltList.LoginName or nil
+
+
+-- Function to save AltList.Chars to AltList.lua
+function AltList.Save()
+  local location = getMudletHomeDir() .. "/AltList.lua"
+  AltList.Chars["AltListTimeZone"] = {}
+  AltList.Chars["AltListTimeZone"].TimeZone = AltList.TimeZone
+  
+  table.save(location, AltList.Chars)
+  
+  AltList.Chars["AltListTimeZone"] = nil
+end
+
+-- Function to load AltList.lua into AltList.Chars
+function AltList.Load()
+  local location = getMudletHomeDir() .. "/AltList.lua"
+  if io.exists(location) then
+    table.load(location, AltList.Chars)
+    if AltList.Chars["AltListTimeZone"] then
+      AltList.TimeZone = AltList.Chars["AltListTimeZone"].TimeZone
+      AltList.Chars["AltListTimeZone"] = nil
+    end
+  end
+end
+
+-- Check if AltList is empty, if so, attempt to load it
+-- This will be run the first time Mudlet/the profile is opened
+if TableSize(AltList.Chars) == 0 then AltList.Load() end
+
+
+function AltList.GetCharName()
+  sendGMCP("Char.Group.List")
+  
+  if AltList.LoginName then
+    return AltList.LoginName
+  end
+  
+  local char_name = string.lower(gmcp.Char.Status.character_name):gsub("^%l", string.upper)
+
+  if char_name == "" then error("gmcp.Char.Status.character_name not returning character name"); return nil end
+  
+  -- Sometimes gmcp.Char.Status bugs out and requires a relog. We can check this against gmcp.Char.Group.List
+  for _,Player in ipairs(gmcp.Char.Group.List) do
+    if Player.name == char_name then
+      return char_name
+    end
+  end
+  
+  cecho("&lt;yellow&gt;Vagonuth-Inventory-Mgmt error: &lt;white&gt;could not get character name, gmcp returning &lt;red&gt;" .. char_name .. "\n")
+  cecho("If this is different than the name you logged in with, try reconnecting to AVATAR\n")
+  cecho("If your char_name is correct, try running the command again\n\n")
+  
+  error("gmcp.Char.Status is not matching gmcp.Char.Group")
+  return nil
+end
+
+
+AltList.GivenAllegRuby = AltList.GivenAllegRuby or false
+AltList.GivenAllegItem = AltList.GivenAllegItem or false
+
+function AltList.PlayerExists(char_name)
+  if (AltList.Chars[char_name]==nil) then
+    AltList.Chars[char_name] = {}
+    AltList.Chars[char_name].Worship = ""
+    AltList.Chars[char_name].Devoted = ""
+    AltList.Chars[char_name].Gold = 0
+    AltList.Chars[char_name].Pracs = 0
+    AltList.Chars[char_name].QP = 0
+    
+    AltList.Chars[char_name].Race = ""
+    AltList.Chars[char_name].Class = ""
+    AltList.Chars[char_name].Level = 0
+    AltList.Chars[char_name].SubLevel = 0
+    AltList.Chars[char_name].Max_HP = 0
+    AltList.Chars[char_name].Max_MP = 0
+    AltList.Chars[char_name].Current_HP = 0
+    AltList.Chars[char_name].Current_MP = 0
+    AltList.Chars[char_name].HitRoll = 0
+    AltList.Chars[char_name].DamRoll= 0
+    AltList.Chars[char_name].ArmorClass = 0
+    AltList.Chars[char_name].Items = 0
+    AltList.Chars[char_name].MaxItems = 0
+    AltList.Chars[char_name].Weight = 0
+    AltList.Chars[char_name].MaxWeight = 0
+    AltList.Chars[char_name].Insigs = {}
+    
+    AltList.Chars[char_name].Alleg = {}
+    AltList.Chars[char_name].Alleg.Insig = ""
+    AltList.Chars[char_name].Alleg.Request = ""
+    AltList.Chars[char_name].Alleg.Cleared = false
+    AltList.Chars[char_name].Alleg.GiveUp = false
+    AltList.Chars[char_name].Alleg.LastDate = ""
+    
+    AltList.Chars[char_name].Spells = {}
+    return false
+  else
+    AltList.UpdateVitals(char_name)
+    return true
+  end
+end
+
+function AltList.UpdateVitals(char_name)
+    -- prevent AltList.UpdateInsigs from overwriting Lord insigs with Legend insigs
+    if gmcp.Char and gmcp.Char.Status and gmcp.Char.Status.level and tonumber(gmcp.Char.Status.level) &gt; 125 then
+      return
+    end
+    AltList.Chars[char_name].Race = gmcp.Char.Status.race
+    AltList.Chars[char_name].Class = gmcp.Char.Status.class
+    AltList.Chars[char_name].Level = tonumber(gmcp.Char.Status.level)
+    AltList.Chars[char_name].SubLevel = tonumber(gmcp.Char.Status.sublevel)
+    AltList.Chars[char_name].Max_HP = tonumber(gmcp.Char.Vitals.maxhp)
+    AltList.Chars[char_name].Max_MP = (gmcp.Char.Vitals.maxmp == nil or gmcp.Char.Vitals.maxmp == "0") and 0 or tonumber(gmcp.Char.Vitals.maxmp)
+    AltList.Chars[char_name].Current_HP = tonumber(gmcp.Char.Vitals.hp)
+    AltList.Chars[char_name].Current_MP = (gmcp.Char.Vitals.maxmp == nil or gmcp.Char.Vitals.maxmp == "0") and 0 or tonumber(gmcp.Char.Vitals.mp)
+    AltList.Chars[char_name].HitRoll = tonumber(gmcp.Char.Status.hitroll)
+    AltList.Chars[char_name].DamRoll = tonumber(gmcp.Char.Status.damroll)
+    AltList.Chars[char_name].ArmorClass = tonumber(gmcp.Char.Status.ac) or 0
+    AltList.Chars[char_name].Items = tonumber(gmcp.Char.Vitals.items)
+    AltList.Chars[char_name].MaxItems = tonumber(string.sub(gmcp.Char.Vitals.string, -3))
+    AltList.Chars[char_name].Weight = tonumber(gmcp.Char.Vitals.wgt)
+    AltList.Chars[char_name].MaxWeight = tonumber(gmcp.Char.Vitals.maxwgt)
+    AltList.Save()
+end
+
+
+function AltList.UpdateGold(gold)
+  local char_name = AltList.GetCharName()
+  AltList.PlayerExists(char_name)
+  AltList.Chars[char_name].Gold = tonumber(gold)
+  AltList.Save()
+end
+
+function AltList.UpdatePracs(pracs)
+  local char_name = AltList.GetCharName()
+  AltList.PlayerExists(char_name)
+  AltList.Chars[char_name].Pracs = tonumber(pracs)
+  AltList.Save()
+end
+
+function AltList.UpdateQP(QP, char_name)
+  local char_name = char_name or AltList.GetCharName()
+  AltList.PlayerExists(char_name)
+  AltList.Chars[char_name].QP = tonumber(QP)
+  AltList.Save()
+end
+
+function AltList.UpdateInsigs(tbl_Insigs)
+  -- prevent AltList.UpdateInsigs from overwriting Lord insigs with Legend insigs
+  if gmcp.Char and gmcp.Char.Status and gmcp.Char.Status.level and tonumber(gmcp.Char.Status.level) &gt; 125 then
+    return
+  end
+
+  local char_name = AltList.GetCharName()
+  AltList.PlayerExists(char_name)  
+  
+  AltList.Chars[char_name].Insigs = deepcopy(tbl_Insigs)
+
+  for _, insig in ipairs(tbl_Insigs) do
+    if insig == "Scratcher" or
+       insig == "Busybody" or
+       insig == "Deed Doer" or
+       insig == "Goto Guy/Gal/Person" or
+       insig == "Feat Finisher" or
+       insig == "Task Master" then
+       
+       if AltList.Chars[char_name].Alleg.Insig ~= "" and AltList.Chars[char_name].Alleg.Insig ~= insig then
+        -- Alleg promotion!
+        VictoryBeep()
+        printGameMessage("Alleg!", char_name .. " promoted to " .. insig, "purple", "white")
+       end
+      AltList.Chars[char_name].Alleg.Insig = insig 
+    end
+  end
+  AltList.Save()
+end
+
+function AltList.AllegRecordRequest(alleg_request)
+  local char_name = AltList.GetCharName()
+  AltList.PlayerExists(char_name)
+  AltList.Chars[char_name].Alleg.Request = alleg_request
+  AltList.Chars[char_name].Alleg.LastDate = getServerTime(AltList.TimeZone)
+  AltList.Chars[char_name].Alleg.Cleared = false
+  AltList.Chars[char_name].Alleg.GiveUp = false
+  AltList.Save()
+end
+
+function AltList.AllegRecordCleared(char_name)
+  if not char_name then char_name = AltList.GetCharName()
+  else char_name = string.lower(char_name):gsub("^%l", string.upper) end
+  AltList.PlayerExists(char_name)
+  AltList.Chars[char_name].Alleg.Cleared = true
+  AltList.Chars[char_name].Alleg.GiveUp = false
+  AltList.Chars[char_name].Alleg.LastDate = getServerTime(AltList.TimeZone)
+  AltList.Chars[char_name].Alleg.Request = ""
+  AltList.Save()
+end
+
+function AltList.AllegRecordGiveUp()
+  local char_name = AltList.GetCharName()
+  AltList.PlayerExists(char_name)
+  AltList.Chars[char_name].Alleg.Cleared = false
+  AltList.Chars[char_name].Alleg.GiveUp = true
+  AltList.Chars[char_name].Alleg.LastDate = getServerTime(AltList.TimeZone)
+  AltList.Chars[char_name].Alleg.Request = ""
+  AltList.Save()
+end
+
+function AltList.AllegNeeded(BroadcastType)
+  local BroadcastType = BroadcastType or "bud"
+  local AllegList = {}
+  local AllegCounts = {}
+  
+  for char_name, _ in pairs(AltList.Chars) do
+    local request = AltList.Chars[char_name].Alleg.Request
+    if request ~= "" and request ~= "Available" then
+      if not AllegList[request] then
+        AllegList[request] = 1
+      else
+        AllegList[request] = AllegList[request] + 1
+      end
+    end
+  end
+
+  if TableSize(AllegList) == 0 then cecho("&lt;red&gt;There's no alleg that you need!\n"); return; end
+
+  local AllegNeededMsg = {}
+  local AllegNeededIndex = 1
+  AllegNeededMsg[AllegNeededIndex] = "Looking for: |BW|"
+
+  for alleg_item, count in pairs(AllegList) do
+    local itemText = alleg_item
+    if count &gt; 1 then
+      itemText = itemText .. " (x" .. count .. ")"
+    end
+    if (string.len(AllegNeededMsg[AllegNeededIndex]) + string.len(itemText) + 2) &gt; 400 then
+      AllegNeededIndex = AllegNeededIndex + 1
+      AllegNeededMsg[AllegNeededIndex] = itemText .. " |BY|||BW| "
+    else
+      AllegNeededMsg[AllegNeededIndex] = AllegNeededMsg[AllegNeededIndex] .. itemText .. " |BY|||BW| "
+    end
+  end
+
+  for _, msg in ipairs(AllegNeededMsg) do
+    send(BroadcastType .. " " .. msg:sub(1, -12) .. ".")
+  end
+end
+
+function AltList.AllegUpdate(char_name)
+
+    if AltList.Chars[char_name].Alleg.Request == "Available" then return end
+    if AltList.Chars[char_name].Alleg.Request == "" and not AltList.Chars[char_name].Alleg.GiveUp and not AltList.Chars[char_name].Alleg.Cleared then return end
+      
+    local days_since_LastDate = calculateDaysBetweenTimes(AltList.Chars[char_name].Alleg.LastDate, getServerTime(AltList.TimeZone))
+    
+    if (days_since_LastDate &gt;= 2 and AltList.Chars[char_name].Alleg.GiveUp)
+    or (days_since_LastDate &gt;= 1 and AltList.Chars[char_name].Alleg.Cleared) then
+        AltList.Chars[char_name].Alleg.GiveUp = false
+        AltList.Chars[char_name].Alleg.Cleared = false
+        AltList.Chars[char_name].Alleg.LastDate = ""
+        AltList.Chars[char_name].Alleg.Request = "Available"
+    end
+end
+
+function AltList.AllegUpdateAll()
+    for char_name,_ in pairs(AltList.Chars) do
+      AltList.AllegUpdate(char_name)
+    end
+    AltList.Save()
+end
+
+-- Define a helper function to use the appropriate unpack function based on Lua version
+function AltList.SafeUnpack(tbl)
+  if table.unpack then
+    return table.unpack(tbl) -- Lua 5.2 and later
+  else
+    return unpack(tbl) -- Lua 5.1 (older versions)
+  end
+end
+
+
+function AltList.FormatReportXCol(num_of_columns, tblColSizes, title, tblReport, showCmdColour, totalReport)
+  if type(title) ~= "string" or type(tblReport) ~= "table" or type(tblColSizes) ~= "table" or type(num_of_columns) ~= "number" then
+    error("Invalid inputs (expected string, number, table, table)")
+    return false
+  end
+
+  if #tblReport == 0 then
+    error("tblReport is empty")
+    return
+  end
+
+  -- Validate that the number of column sizes matches the number of columns
+  if #tblColSizes ~= num_of_columns then
+    error("The number of column sizes does not match the specified number of columns")
+    return false
+  end
+  
+  local totalColSize = 0
+
+  -- Construct the format string dynamically based on the column sizes
+  local lineFormat = "&lt;%s&gt;"
+  for i = 1, num_of_columns do
+    lineFormat = lineFormat .. "%" .. tblColSizes[i] .. "s"
+    tblColSizes[i] = math.abs(tblColSizes[i])
+    totalColSize = totalColSize + tblColSizes[i]
+  end
+  lineFormat = lineFormat .. "\n"
+
+  local lineColour = showCmdColour or "white"
+
+  -- Print the title and separator line
+  cecho("&lt;" .. lineColour .. "&gt;" .. title .. "\n")
+  cecho("&lt;" .. lineColour .. "&gt;" .. string.rep("-", totalColSize) .. "\n")
+
+  -- Print the report's header (assumes first entry is header row)
+  local headerRow = tblReport[1]
+  local headerArgs = {}
+  for i = 1, num_of_columns do
+    headerArgs[#headerArgs + 1] = headerRow[i] or ""
+  end
+  cecho(string.format(lineFormat, lineColour, AltList.SafeUnpack(headerArgs)))
+  table.remove(tblReport, 1)
+  cecho("&lt;" .. lineColour .. "&gt;" .. string.rep("-", totalColSize) .. "\n")
+
+  -- Print each row in the report
+  for _, row in ipairs(tblReport) do
+    if row[1] == AltList.GetCharName() then
+      lineColour = "yellow"
+    else
+      lineColour = showCmdColour or "white"
+    end
+
+    -- Prepare the values for each row
+    local rowArgs = {}
+    for i = 1, num_of_columns do
+      rowArgs[#rowArgs + 1] = string.sub(row[i] or "", 1, tblColSizes[i] - 1)
+    end
+
+    cecho(string.format(lineFormat, lineColour, AltList.SafeUnpack(rowArgs)))
+  end
+  
+  lineColour = showCmdColour or "white"
+  
+  if totalReport then
+    cecho("&lt;" .. lineColour .. "&gt;" .. string.rep("-", totalColSize) .. "\n")
+    cecho(string.format("&lt;%s&gt;%-" .. (totalColSize - tblColSizes[#tblColSizes]) .. "s%" .. tblColSizes[#tblColSizes] .. "s\n", lineColour, "Total:", format_int(totalReport)))
+  end
+
+  -- Print the final separator line
+  cecho("&lt;" .. lineColour .. "&gt;" .. string.rep("-", totalColSize) .. "\n")
+end
+
+function AllegTableSort(a, b)
+    -- Custom order for sorting
+    local order = {"Task Master", "Feat Finisher", "Goto Guy/Gal/Person", "Deed Doer", "Busybody", "Scratcher", ""}
+
+    local aInsignia = AltList.Chars[a].Alleg.Insig
+    local bInsignia = AltList.Chars[b].Alleg.Insig
+
+    -- Get the index of the Insignia values in the custom order
+    local aIndex = 0
+    local bIndex = 0
+    for i, value in ipairs(order) do
+        if aInsignia == value then
+            aIndex = i
+        end
+        if bInsignia == value then
+            bIndex = i
+        end
+    end
+
+    return aIndex &lt; bIndex
+end
+
+function AltList.ReportAlleg()
+  local debug_timer = os.clock()
+  AltList.AllegUpdateAll()
+  
+  local Available = {}
+  local Request = {}
+  local Tomorrow = {}
+  local TwoDays = {}
+  
+  for char_name,_ in pairs(AltList.Chars) do
+    if AltList.Chars[char_name].Level &gt;= 125 then 
+      if AltList.Chars[char_name].Alleg.Request == "Available" then 
+        table.insert(Available, char_name)
+      elseif AltList.Chars[char_name].Alleg.Cleared then
+        table.insert(Tomorrow, char_name)
+      elseif AltList.Chars[char_name].Alleg.GiveUp then      
+        local days_since_LastDate = calculateDaysBetweenTimes(AltList.Chars[char_name].Alleg.LastDate, getServerTime(AltList.TimeZone))
+        if days_since_LastDate == 0 then
+          table.insert(TwoDays, char_name)
+        else
+          table.insert(Tomorrow, char_name)
+        end
+      elseif AltList.Chars[char_name].Alleg.Request ~= "" then
+        table.insert(Request, char_name)      
+      end
+    end
+  end
+  
+  if #Request == 0 and #Available == 0 and #Tomorrow == 0 and #TwoDays == 0 then
+    print("No Alleg Report available")
+    return
+  end
+  
+  table.sort(Available, AllegTableSort)
+  table.sort(Tomorrow, AllegTableSort)
+  table.sort(TwoDays, AllegTableSort)
+  table.sort(Request, AllegTableSort)
+  
+  local tblAllegReport = {}
+  
+  table.insert(tblAllegReport, {"Character", "Alleg Item/Status", "Who has it? (Ttl)", "Insignia"}) 
+
+  if #Request &gt; 0 then
+    for _,y in pairs(Request) do
+      local item_name = AltList.Chars[y].Alleg.Request
+      local item_report = InventoryList.Search(InventoryList.Items, item_name) -- note: adds about 0.25s to processing time when player has 24 items o/s
+      if InventoryList.HaveItem(item_name) then
+        table.insert(tblAllegReport, {y, item_name, item_report[1][1] .. " (" .. #item_report .. ")" , AltList.Chars[y].Alleg.Insig})
+      else
+        table.insert(tblAllegReport, {y, item_name, "", AltList.Chars[y].Alleg.Insig})
+      end
+    end
+  end
+  if #Available &gt; 0 then
+    for _,y in pairs(Available) do
+      table.insert(tblAllegReport, {y, "Available", "", AltList.Chars[y].Alleg.Insig})
+    end
+  end
+  if #Tomorrow &gt; 0 then
+    for _,y in pairs(Tomorrow) do
+      table.insert(tblAllegReport, {y, "Tomorrow " .. (AltList.Chars[y].Alleg.Cleared and "(Cleared)" or "(Give Up)"), "", AltList.Chars[y].Alleg.Insig})
+    end
+  end
+  if #TwoDays &gt; 0 then
+    for _,y in pairs(TwoDays) do
+      table.insert(tblAllegReport, {y, "Two Days (Give Up)", "", AltList.Chars[y].Alleg.Insig})
+    end
+  end
+  
+  AltList.FormatReportXCol(4, {-20, -35, -20, -20}, "Alleg Report", tblAllegReport)
+  if #Available &gt; 0 then cecho("&lt;white&gt;" .. #Available .. " alts available to turn in rubies\n") end
+    if GlobalVar.Debug then
+    printMessage("DEBUG", string.format("AltList.ReportAlleg() ran in %.2f seconds (with %d items)\n", (os.clock() - debug_timer), #Request))
+  end
+  
+end
+
+function AltList.ReportNextAvailableAlleg()
+  AltList.AllegUpdateAll()
+  
+  local Available = {}
+  
+  for char_name,_ in pairs(AltList.Chars) do
+    if AltList.Chars[char_name].Level == 125 and AltList.Chars[char_name].Alleg.Request == "Available" and char_name ~= AltList.GetCharName() then 
+        table.insert(Available, char_name)
+    end
+  end
+  
+  table.sort(Available, AllegTableSort)
+
+  if #Available == 0 then
+    printMessage("Alleg", "Completed on all characters", "yellow", "white")
+  else
+    printMessage("Alleg", "Next available character: " .. Available[1], "yellow", "white")
+  end
+end
+
+function AltList.ReportGold()
+  local tblCharReport = {}
+  local totalGold = 0
+  
+  -- Collect characters with gold and sum up the total
+  for char_name, _ in pairs(AltList.Chars) do
+    if AltList.Chars[char_name].Gold &gt; 0 then
+      table.insert(tblCharReport, {char_name, AltList.Chars[char_name].Gold})
+      totalGold = totalGold + AltList.Chars[char_name].Gold
+    end
+  end
+  
+  -- Sort characters by gold amount in descending order
+  table.sort(tblCharReport, function(a, b) return a[2] &gt; b[2] end)
+  
+  for _,tblChar in pairs(tblCharReport) do
+    tblChar[2] = format_int(tblChar[2])
+  end
+  
+  -- Add a header row
+  table.insert(tblCharReport, 1, {"Character", "Gold"})
+  
+  -- Call the formatting function with 2 columns, each of width 20
+  AltList.FormatReportXCol(2, {-20, 20}, "Gold Report", tblCharReport, nil, totalGold)
+end
+
+function AltList.ReportQP()
+  local tblCharReport = {}
+  local totalQP = 0
+
+  -- Collect characters with QP and sum up the total
+  for char_name, _ in pairs(AltList.Chars) do
+    if AltList.Chars[char_name].QP &gt; 0 then
+      table.insert(tblCharReport, {char_name, AltList.Chars[char_name].QP})
+      totalQP = totalQP + AltList.Chars[char_name].QP
+    end
+  end
+
+  -- Sort characters by QP in descending order
+  table.sort(tblCharReport, function(a, b) return a[2] &gt; b[2] end)
+  table.insert(tblCharReport, 1, {"Character/Token", "QP"})
+
+  -- Define the token denominations
+  local QPtoken_denom = {
+    {"QuestPoint Token (1QP)", 1},
+    {"QuestPoint Token (2QP)", 2},
+    {"QuestPoint Token (3QP)", 3},
+    {"QuestPoint Token (4QP)", 4},
+    {"QuestPoint Token (5QP)", 5},
+    {"QuestPoint Token (10QP)", 10},
+    {"QuestPoint Token (20QP)", 20},
+    {"QuestPoint Token (30QP)", 30},
+    {"Fae Rune For 'Pain'", 5},
+    {"Fae Rune For 'Insanity'", 5},
+    {"Fae Rune For 'Fire'", 5},
+    {"Fae Rune For 'Disease'", 5},
+    {"Fae Rune For 'Despair'", 10},
+    {"Fae Rune For 'Enslavement'", 12},
+    {"Fae Rune For 'Destruction'", 12},
+    {"Orderly Dragon Scale", 5},
+  }
+
+  -- Collect token information and add to the report
+  for _, token_tbl in pairs(QPtoken_denom) do 
+    local QPtoken_name = token_tbl[1]
+    local denom = token_tbl[2]
+    local QPtoken = InventoryList.ItemsOnHand(QPtoken_name)
+    
+    if QPtoken &gt; 0 then
+      table.insert(tblCharReport, {QPtoken_name .. " x " .. QPtoken, QPtoken * denom})
+      totalQP = totalQP + QPtoken * denom
+    end
+  end
+
+  -- Call the report formatting function with 2 columns and the total QP
+  AltList.FormatReportXCol(2, {-30, 10}, "QuestPoints (QP)", tblCharReport, nil, totalQP)
+end
+
+function AltList.ReportRegen(level)
+  local tblCharReport = {}
+  local tempReport = {} -- Temporary table to store character data and missing mana percentage
+
+  assert(level &gt; 0 and (level == 250 or level == 125 or level &lt;= 51))
+
+  for char_name, _ in pairs(AltList.Chars) do
+    if AltList.Chars[char_name].Level == level then 
+      if AltList.Chars[char_name].Current_HP and AltList.Chars[char_name].Current_MP then
+        local current_HP = AltList.Chars[char_name].Current_HP
+        local max_HP = AltList.Chars[char_name].Max_HP
+        local current_MP = AltList.Chars[char_name].Current_MP
+        local max_MP = AltList.Chars[char_name].Max_MP
+
+        -- Check if HP or MP is less than 90%
+        if (current_HP / max_HP &lt; 0.9 or current_MP / max_MP &lt; 0.9) then
+          local hp_report = current_HP .. "/" .. max_HP
+          local mp_report = current_MP .. "/" .. max_MP
+          local missing_mana_percentage = (max_MP - current_MP) / max_MP
+          table.insert(tempReport, {char_name, hp_report, mp_report, missing_mana_percentage})
+        end
+      end
+    end
+  end
+
+  -- Sort tempReport in descending order of missing mana percentage
+  table.sort(tempReport, function(a, b) return a[4] &gt; b[4] end)
+
+  -- Insert sorted data into tblCharReport
+  for _, report in ipairs(tempReport) do
+    table.insert(tblCharReport, {report[1], report[2], report[3]})
+  end
+
+  -- Add header to the report
+  table.insert(tblCharReport, 1, {"Character", "Hit Points", "Mana"})
+
+  -- Call the format function with the new format specifications
+  AltList.FormatReportXCol(3, {-20, -20, -20}, "Regen Report (Level: " .. level .. ")", tblCharReport)
+end
+
+function AltList.ReportInsig()
+  local tblCharReport = {}
+
+  local InsigCount = {
+    ["Scratcher"] = 0,
+    ["Busybody"] = 0,
+    ["Deed Doer"] = 0,
+    ["Goto Guy/Gal/Person"] = 0,
+    ["Feat Finisher"] = 0,
+    ["Task Master"] = 0,
+  }
+  
+  local TotalCount = 0
+
+  -- Count the insignias for characters at level 125
+  for char_name, _ in pairs(AltList.Chars) do
+    if AltList.Chars[char_name].Level == 125 then
+      for _, insig in ipairs(AltList.Chars[char_name].Insigs) do
+        if InsigCount[insig] ~= nil then
+          InsigCount[insig] = InsigCount[insig] + 1
+          TotalCount = TotalCount + 1
+        end
+      end
+    end
+  end
+  
+  if TotalCount == 0 then
+    printMessage("Insig Report", "No alts with alleg insigs are tracked. Try logging in with each alt and typing 'insig' once")
+    return
+  end
+
+  -- Collect insignia counts into the report
+  for _, insig in ipairs({"Scratcher", "Busybody", "Deed Doer", "Goto Guy/Gal/Person", "Feat Finisher", "Task Master"}) do
+    local count = InsigCount[insig]
+    if count &gt; 0 then
+      table.insert(tblCharReport, {insig, count})
+    end
+  end
+
+  -- Add header to the report
+  table.insert(tblCharReport, 1, {"Alleg Level", "Quantity"})
+
+  -- Call the format function with the new format specifications
+  AltList.FormatReportXCol(2, {-20, 20}, "Alleg Insig Report", tblCharReport, nil, TotalCount)
+end
+
+function AltList.ReportInventorySpace(top_x)
+  -- inspired by sumnissan's lack of inventory management
+  top_x = top_x or 5
+  
+  -- ensure that top_x is a number
+  if type(top_x) ~= "number" then
+    error("AltList.ReportInventorySpace(top_x): top_x must be a number")
+    return false
+  end
+
+  local tblCharReportHero = {} -- for characters Level 51
+  local tblCharReportLord = {} -- for characters Level 125
+
+  for char_name, _ in pairs(AltList.Chars) do
+    local freeItems = AltList.Chars[char_name].MaxItems - AltList.Chars[char_name].Items
+    local freeWeight = AltList.Chars[char_name].MaxWeight - AltList.Chars[char_name].Weight
+    local level = AltList.Chars[char_name].Level
+
+    if level == 51 then
+      table.insert(tblCharReportHero, {char_name, freeWeight, freeItems})
+    elseif level == 125 then
+      table.insert(tblCharReportLord, {char_name, freeWeight, freeItems})
+    end
+  end
+
+  -- Determine if reverse sort is needed
+  local ascending = top_x &lt; 0
+  top_x = math.abs(top_x)  -- Convert top_x to positive for sorting
+  
+  -- Sort the tables based on free weight
+  if ascending then 
+    table.sort(tblCharReportHero, function(a, b) return a[2] &lt; b[2] end)
+    table.sort(tblCharReportLord, function(a, b) return a[2] &lt; b[2] end)
+  else
+    table.sort(tblCharReportHero, function(a, b) return a[2] &gt; b[2] end)
+    table.sort(tblCharReportLord, function(a, b) return a[2] &gt; b[2] end)
+  end
+
+  
+  -- Trim the reports to top_x
+  while #tblCharReportHero &gt; top_x + 1 do
+    table.remove(tblCharReportHero)
+  end
+
+  while #tblCharReportLord &gt; top_x + 1 do
+    table.remove(tblCharReportLord)
+  end
+
+  -- Add headers
+  table.insert(tblCharReportHero, 1, {"Heroes", "Free Weight", "Free Items"})
+  table.insert(tblCharReportLord, 1, {"Lords", "Free Weight", "Free Items"})
+
+  if #tblCharReportLord == 1 and #tblCharReportHero == 1 then
+    printMessage("Inventory Space Report Error", "You have no lords or heroes on your altlist. Try logging in with your other alts first")
+    return
+  end
+  
+  -- Print the inventory space report using the new format
+  cecho("\n&lt;white&gt;Inventory Space Report")
+  if #tblCharReportLord &gt; 1 then
+    AltList.FormatReportXCol(3, {-20, 15, 15}, " ", tblCharReportLord) 
+  end
+  if #tblCharReportHero &gt; 1 then
+    AltList.FormatReportXCol(3, {-20, 15, 15}, " ", tblCharReportHero) 
+  end
+end
+
+function AltList.UpdateWorship(worship, devoted)
+  local char_name = AltList.GetCharName()
+  AltList.PlayerExists(char_name)
+  
+  AltList.Chars[char_name].Worship = worship
+  AltList.Chars[char_name].Devoted = devoted
+end
+
+function GetSpellLagMod()
+  local char_name = AltList.GetCharName()
+  -- If we don't know our worship, just return 1 as the modifier
+  if AltList.Chars[char_name] == nil or AltList.Chars[char_name].Worship == nil then send("score",false); return 1 end
+  
+  if AltList.Chars[char_name].Worship == "Durr" or
+     AltList.Chars[char_name].Worship == "Quixoltan" or
+     AltList.Chars[char_name].Worship == "Kra" then
+      return 1.1
+  elseif AltList.Chars[char_name].Worship == "Shizaga" then
+    return 0.8
+  else  
+    return 1
+  end
+end
+
+function GetSpellCostModWorship()
+  local char_name = AltList.GetCharName()
+  -- If we don't know our worship, just return 1 as the modifier
+  if AltList.Chars[char_name] == nil or AltList.Chars[char_name].Worship == nil then send("score",false); return 1 end
+  
+  if AltList.Chars[char_name].Worship == "Bhyss" then return 0.9 end
+  
+  if AltList.Chars[char_name].Worship == "Gorn" or
+     AltList.Chars[char_name].Worship == "Quixoltan" then return 1.05 end
+     
+  if AltList.Chars[char_name].Worship == "Shizaga" then return 0.95 end
+  
+  if AltList.Chars[char_name].Worship == "Tor" or
+     AltList.Chars[char_name].Worship == "Werredan" then return 1.1 end
+
+  return 1
+
+end
+
+function GetSpellCostModRacial(race, type)
+    local racial mod = 1
+    race = string.lower(race)
+  
+    if not (type == "arcane" or type == "divine" or type == "psionic") then
+      pdebug("ERROR: GetSpellCostModRacial(type): type must be one of arcane, divine or psionic")
+      error("GetSpellCostModRacial(type): type must be one of arcane, divine or psionic")
+    end
+    
+    if (race == string.lower("Centaur")) then
+        if type == "arcane" then racialmod = 0.9 end
+        if type == "divine" then racialmod = 0.85 end
+        if type == "psionic" then racialmod = 0.9 end
+    elseif (race == string.lower("Deep Gnome")) then
+        if type == "arcane" then racialmod = 0.93 end
+        if type == "divine" then racialmod = 0.95 end
+        if type == "psionic" then racialmod = 0.95 end
+    elseif (race == string.lower("Draconian")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 0.95 end
+    elseif (race == string.lower("Drow")) then
+        if type == "arcane" then racialmod = 0.88 end
+        if type == "divine" then racialmod = 0.9 end
+        if type == "psionic" then racialmod = 0.9 end
+    elseif (race == string.lower("Duergar")) then
+        if type == "arcane" then racialmod = 1.1; print("Please confirm value for Duergar with alias: spellcostcheck") end
+        if type == "divine" then racialmod = 0.98; print("Please confirm value for Duergar with alias: spellcostcheck")  end
+        if type == "psionic" then racialmod = 1.02; print("Please confirm value for Duergar with alias: spellcostcheck")  end
+    elseif (race == string.lower("Dwarf")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 0.95 end
+        if type == "psionic" then racialmod = 1.06 end
+    elseif (race == string.lower("Elf")) then
+        if type == "arcane" then racialmod = 0.88 end
+        if type == "divine" then racialmod = 0.9 end
+        if type == "psionic" then racialmod = 0.9 end
+    elseif (race == string.lower("Ent")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 0.8 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("Firedrake")) then
+        if (tonumber(gmcp.Char.Status.level) &gt; 51 or tonumber(gmcp.Char.Status.sublevel) &gt; 250) then racialmod = 0.98 else racialmod = 1 end
+    elseif (race == string.lower("Gargoyle")) then
+        if type == "arcane" then racialmod = 0.85 end
+        if type == "divine" then racialmod = 0.9 end
+        if type == "psionic" then racialmod = 0.9 end
+    elseif (race == string.lower("Giant")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 1.1 end
+        if type == "psionic" then racialmod = 1.1 end
+    elseif (race == string.lower("Gnome")) then
+        if type == "arcane" then racialmod = 0.93 end
+        if type == "divine" then racialmod = 0.95 end
+        if type == "psionic" then racialmod = 0.95 end
+    elseif (race == string.lower("Goblin")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 1.1 end
+        if type == "psionic" then racialmod = 1.1 end
+    elseif (race == string.lower("Halfling")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("Half-Elf")) then
+        if type == "arcane" then racialmod = 0.94 end
+        if type == "divine" then racialmod = 0.95 end
+        if type == "psionic" then racialmod = 0.95 end
+    elseif (race == string.lower("Half-Orc")) then
+        if type == "arcane" then racialmod = 1.05 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1.05 end
+    elseif (race == string.lower("Harpy")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1.15 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("Human")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("Imp")) then
+        if type == "arcane" then racialmod = 1; print("Please confirm value for Imp with alias: spellcostcheck") end
+        if type == "divine" then racialmod = 1; print("Please confirm value for Imp with alias: spellcostcheck") end
+        if type == "psionic" then racialmod = 1; print("Please confirm value for Imp with alias: spellcostcheck") end
+    elseif (race == string.lower("Kobold")) then
+        if type == "arcane" then racialmod = 1.3 end
+        if type == "divine" then racialmod = 1.3 end
+        if type == "psionic" then racialmod = 1.3 end
+    elseif (race == string.lower("Kzinti")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("Lizard Man")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 0.95 end
+    elseif (race == string.lower("Ogre")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1.1 end
+    elseif (race == string.lower("Orc")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1.1 end
+    elseif (race == string.lower("Troglodyte")) then
+        if type == "arcane" then racialmod = 1.25 end
+        if type == "divine" then racialmod = 1.25 end
+        if type == "psionic" then racialmod = 1.225 end
+    elseif (race == string.lower("Demonseed")) then
+        if type == "arcane" then racialmod = 0.87 end
+        if type == "divine" then racialmod = 0.9 end
+        if type == "psionic" then racialmod = 0.9 end
+    elseif (race == string.lower("Dragon")) then
+        if type == "arcane" then racialmod = 0.9 end
+        if type == "divine" then racialmod = 0.9 end
+        if type == "psionic" then racialmod = 0.85 end
+    elseif (race == string.lower("Drider")) then
+        if type == "arcane" then racialmod = 0.98 end
+        if type == "divine" then racialmod = 0.95 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("Gith")) then
+        if type == "arcane" then racialmod = 0.95 end
+        if type == "divine" then racialmod = 0.95 end
+        if type == "psionic" then racialmod = 0.83 end
+    elseif (race == string.lower("Golem")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1.1 end
+        if type == "psionic" then racialmod = 1.1 end
+    elseif (race == string.lower("Griffon")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 1 end
+    elseif (race == string.lower("High Elf")) then
+        if type == "arcane" then racialmod = 0.85 end
+        if type == "divine" then racialmod = 0.85 end
+        if type == "psionic" then racialmod = 0.8 end
+    elseif (race == string.lower("Hobgoblin")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 1.1 end
+        if type == "psionic" then racialmod = 1.05 end
+    elseif (race == string.lower("Ignatur")) then
+        if type == "arcane" then racialmod = 0.92 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 0.96 end
+    elseif (race == string.lower("Minotaur")) then
+        if type == "arcane" then racialmod = 1.25 end
+        if type == "divine" then racialmod = 1.15 end
+        if type == "psionic" then racialmod = 1.25 end
+    elseif (race == string.lower("Miraar")) then
+        if type == "arcane" then racialmod = 1 end
+        if type == "divine" then racialmod = 1 end
+        if type == "psionic" then racialmod = 0.9 end
+    elseif (race == string.lower("Sprite")) then
+        if type == "arcane" then racialmod = 0.75 end
+        if type == "divine" then racialmod = 0.75 end
+        if type == "psionic" then racialmod = 0.75 end
+    elseif (race == string.lower("Troll")) then
+        if type == "arcane" then racialmod = 1.1 end
+        if type == "divine" then racialmod = 1.15 end
+        if type == "psionic" then racialmod = 1.15 end
+    elseif (race == string.lower("Tuataur")) then
+        if type == "arcane" then racialmod = 0.9 end
+        if type == "divine" then racialmod = 0.9 end
+        if type == "psionic" then racialmod = 0.8 end
+    else
+      error("Unknown race: " .. race)
+      return -1     
+    end
+    
+    return racialmod
+  
+end
+
+
+function GetSpellCostMod(type)
+
+  local classmod = 1
+    
+  if (gmcp.Char.Status.class == "Druid") then classmod = 0.85 end
+  
+  return GetSpellCostModRacial(gmcp.Char.Status.race,type) * GetSpellCostModWorship() * classmod
+  
+end
+
+
+function GetSkillLagMod()
+  return 1
+end
+
+-- AltList.TriggerWorship = AltList.TriggerWorship or nil
+--if AltList.TriggerWorship then
+--  killTrigger(AltList.TriggerWorship )
+--end
+
+--AltList.TriggerWorship = tempRegexTrigger("^You are \d+ years old \(\d+ real life hours?\) and a (?&lt;devoted&gt;devoted worshipper|worshipper) of (?&lt;worship&gt;.*).$", [[AltList.UpdateWorship(matches.worship, (matches.devoted == "devoted worshipper" and true or false))]]) </script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>New script</name>
+					<packageName></packageName>
+					<script>
+
+
+</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+		</ScriptGroup>
+	</ScriptPackage>
+	<KeyPackage />
+	<VariablePackage>
+		<HiddenVariables />
+	</VariablePackage>
+</MudletPackage>
